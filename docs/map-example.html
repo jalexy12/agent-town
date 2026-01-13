@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Town</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background: #0a0a0c;
+      font-family: 'Space Mono', monospace;
+      color: #c4c4c4;
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      grid-template-rows: 44px 1fr;
+      height: 100vh;
+    }
+    
+    .header {
+      grid-column: 1 / -1;
+      background: #111116;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid #222;
+    }
+    
+    .header h1 {
+      font-family: 'VT323', monospace;
+      font-size: 26px;
+      color: #7fef7f;
+      text-shadow: 0 0 15px rgba(127, 239, 127, 0.3);
+      letter-spacing: 2px;
+    }
+    
+    .header-stats { display: flex; gap: 20px; font-size: 11px; color: #555; }
+    .header-stats span { color: #efef7f; font-family: 'VT323', monospace; font-size: 15px; }
+    
+    #game-container { background: #0a0a0c; position: relative; }
+    
+    .scanlines {
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 2px);
+      pointer-events: none; z-index: 10;
+    }
+    
+    .sidebar {
+      background: #111116;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #222;
+      overflow: hidden;
+    }
+    
+    .panel { padding: 12px; overflow-y: auto; }
+    .panel-title {
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: #7f7fef;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .agent-panel { flex: 0 0 auto; border-bottom: 1px solid #222; }
+    .spawns-panel { flex: 0 0 140px; border-bottom: 1px solid #222; }
+    .feed-panel { flex: 1; min-height: 0; }
+    
+    .agent-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .agent-avatar {
+      width: 40px; height: 40px;
+      border-radius: 4px;
+      border: 2px solid #333;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .agent-name { font-family: 'VT323', monospace; font-size: 20px; color: #fff; }
+    .agent-status { font-size: 10px; color: #7fef7f; }
+    .agent-location { font-size: 9px; color: #555; margin-top: 1px; }
+    
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; }
+    .stat { background: #1a1a1f; padding: 5px 7px; border-radius: 2px; }
+    .stat-label { color: #444; font-size: 8px; text-transform: uppercase; }
+    .stat-value { font-family: 'VT323', monospace; font-size: 15px; }
+    .stat-value.turns { color: #ef7f7f; }
+    .stat-value.gold { color: #efef7f; }
+    
+    .skills { margin-bottom: 8px; }
+    .skill-row { display: flex; justify-content: space-between; font-size: 9px; padding: 2px 0; }
+    .skill-name { color: #666; }
+    .skill-level { color: #7fef7f; font-family: 'VT323', monospace; }
+    
+    .no-selection { color: #333; font-style: italic; text-align: center; padding: 20px 10px; font-size: 11px; }
+    
+    .spawn-list { display: flex; flex-direction: column; gap: 4px; }
+    .spawn-item {
+      background: #1a1a1f;
+      padding: 6px 8px;
+      border-radius: 2px;
+      font-size: 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 2px solid #333;
+    }
+    .spawn-item.common { border-left-color: #666; }
+    .spawn-item.uncommon { border-left-color: #7f7fef; }
+    .spawn-item.rare { border-left-color: #efef7f; }
+    .spawn-item.legendary { border-left-color: #ef7f7f; }
+    .spawn-location { color: #555; }
+    
+    .feed-list { display: flex; flex-direction: column; gap: 4px; }
+    .feed-item {
+      background: #1a1a1f;
+      padding: 6px 8px;
+      border-radius: 2px;
+      font-size: 9px;
+      line-height: 1.4;
+      border-left: 2px solid #333;
+    }
+    .feed-item.discovery { border-left-color: #efef7f; }
+    .feed-item.harvest { border-left-color: #7fef7f; }
+    .feed-item.trade { border-left-color: #7f7fef; }
+    .feed-item.move { border-left-color: #666; }
+    .feed-time { font-size: 8px; color: #333; margin-bottom: 2px; }
+    .feed-actor { color: #7fef7f; }
+    
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>◈ AGENT TOWN</h1>
+      <div class="header-stats">
+        <div>DAY <span id="day-counter">14</span></div>
+        <div>SEASON <span id="season">Spring</span></div>
+        <div>AGENTS <span id="agent-count">6</span></div>
+        <div>SPAWNS <span id="spawn-count">8</span></div>
+      </div>
+    </header>
+    
+    <div id="game-container">
+      <div class="scanlines"></div>
+    </div>
+    
+    <div class="sidebar">
+      <div class="panel agent-panel" id="agent-panel">
+        <div class="panel-title">◆ Agent</div>
+        <div class="no-selection">Click an agent to inspect</div>
+      </div>
+      <div class="panel spawns-panel">
+        <div class="panel-title">◆ Active Spawns</div>
+        <div class="spawn-list" id="spawn-list"></div>
+      </div>
+      <div class="panel feed-panel">
+        <div class="panel-title">◆ Feed</div>
+        <div class="feed-list" id="feed-list"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const TILE = 16;
+const MAP_W = 40;
+const MAP_H = 30;
+
+// ============================================================
+// AREAS - explorable regions (spawns can appear in any)
+// ============================================================
+const AREAS = {
+  hills: {
+    name: 'The Hills',
+    color: 0x6a5a4a,
+    bounds: { x: 8, y: 0, w: 24, h: 8 },
+  },
+  forest: {
+    name: 'The Forest', 
+    color: 0x2a5a2a,
+    bounds: { x: 0, y: 8, w: 10, h: 14 },
+  },
+  riverbank: {
+    name: 'The Riverbank',
+    color: 0x3a5a6a,
+    bounds: { x: 30, y: 8, w: 10, h: 14 },
+  },
+  ruins: {
+    name: 'The Ruins',
+    color: 0x4a4a5a,
+    bounds: { x: 8, y: 22, w: 24, h: 8 },
+  },
+  commons: {
+    name: 'The Commons',
+    color: 0x3a3a3a,
+    bounds: { x: 10, y: 8, w: 20, h: 14 },
+  }
+};
+
+// ============================================================
+// AGENTS
+// ============================================================
+const AGENTS = [
+  { id: 'ada', name: 'Ada', color: 0x7fef7f, area: 'forest', status: 'foraging', turns: 7, gold: 45, skills: { foraging: 'journeyman', medicine: 'novice' } },
+  { id: 'ben', name: 'Ben', color: 0x7f7fef, area: 'hills', status: 'exploring', turns: 5, gold: 120, skills: { mining: 'expert', smithing: 'journeyman' } },
+  { id: 'cora', name: 'Cora', color: 0xef7fef, area: 'commons', status: 'trading', turns: 4, gold: 80, skills: { fishing: 'expert' } },
+  { id: 'dan', name: 'Dan', color: 0xefef7f, area: 'riverbank', status: 'fishing', turns: 6, gold: 35, skills: { fishing: 'journeyman' } },
+  { id: 'eve', name: 'Eve', color: 0xef7f7f, area: 'ruins', status: 'exploring', turns: 3, gold: 200, skills: { foraging: 'novice' } },
+  { id: 'finn', name: 'Finn', color: 0x7fefef, area: 'commons', status: 'idle', turns: 8, gold: 60, skills: { smithing: 'novice', mining: 'novice' } },
+];
+
+// ============================================================
+// SPAWNS - resources in the world (can appear anywhere)
+// ============================================================
+const SPAWNS = [
+  // Hills - mostly ore, but some variety
+  { id: 1, type: 'ore_vein', name: 'Copper Vein', area: 'hills', rarity: 'common', richness: 5, x: 18, y: 3 },
+  { id: 2, type: 'herb_patch', name: 'Mountain Thyme', area: 'hills', rarity: 'uncommon', richness: 2, x: 25, y: 5 },
+  
+  // Forest - mostly herbs, but some surprises
+  { id: 3, type: 'herb_patch', name: 'Medicinal Herbs', area: 'forest', rarity: 'common', richness: 4, x: 4, y: 12 },
+  { id: 4, type: 'artifact', name: 'Buried Idol', area: 'forest', rarity: 'rare', richness: 1, x: 7, y: 18 },
+  { id: 5, type: 'ore_vein', name: 'Iron Deposit', area: 'forest', rarity: 'uncommon', richness: 3, x: 3, y: 15 },
+  
+  // Riverbank - fish and mixed
+  { id: 6, type: 'fishing_spot', name: 'Deep Pool', area: 'riverbank', rarity: 'uncommon', richness: 6, x: 35, y: 14 },
+  { id: 7, type: 'herb_patch', name: 'River Mint', area: 'riverbank', rarity: 'common', richness: 3, x: 33, y: 11 },
+  
+  // Ruins - artifacts and surprises
+  { id: 8, type: 'artifact', name: 'Ancient Tablet', area: 'ruins', rarity: 'rare', richness: 1, x: 20, y: 26 },
+  { id: 9, type: 'gem_deposit', name: 'Exposed Gems', area: 'ruins', rarity: 'uncommon', richness: 2, x: 14, y: 24 },
+  { id: 10, type: 'fishing_spot', name: 'Flooded Chamber', area: 'ruins', rarity: 'rare', richness: 4, x: 28, y: 25 },
+];
+
+// ============================================================
+// FEED
+// ============================================================
+const FEED = [
+  { type: 'discovery', actor: 'Ben', text: 'discovered Iron Deposit in the forest', time: 'Day 14, 2:00' },
+  { type: 'harvest', actor: 'Ada', text: 'harvested Mountain Thyme (+2 herbs)', time: 'Day 14, 1:30' },
+  { type: 'trade', actor: 'Cora', text: 'sold 5 trout to Dan for 20g', time: 'Day 14, 1:00' },
+  { type: 'discovery', actor: 'Eve', text: 'discovered Flooded Chamber in the ruins', time: 'Day 14, 0:30' },
+  { type: 'move', actor: 'Finn', text: 'traveled to the commons', time: 'Day 14, 0:00' },
+  { type: 'discovery', actor: 'Dan', text: 'found nothing in the riverbank', time: 'Day 13, 5:00' },
+];
+
+// ============================================================
+// PHASER SCENE
+// ============================================================
+class TownScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'TownScene' });
+    this.agentSprites = {};
+    this.spawnSprites = {};
+    this.selectedAgent = null;
+  }
+
+  create() {
+    this.createTextures();
+    this.drawAreas();
+    this.drawCommons();
+    this.drawSpawns();
+    this.createAgents();
+    this.setupCamera();
+    this.populateSidebar();
+  }
+
+  createTextures() {
+    const g = this.make.graphics({ add: false });
+    
+    // Grass base
+    g.clear();
+    g.fillStyle(0x3a5a3a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.generateTexture('grass', TILE, TILE);
+    
+    // Hills terrain
+    g.clear();
+    g.fillStyle(0x6a5a4a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.fillStyle(0x7a6a5a);
+    g.fillRect(2, 2, 4, 3);
+    g.fillRect(10, 8, 4, 4);
+    g.generateTexture('hills', TILE, TILE);
+    
+    // Forest terrain
+    g.clear();
+    g.fillStyle(0x2a4a2a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.fillStyle(0x3a5a3a);
+    g.fillRect(4, 4, 3, 3);
+    g.fillRect(9, 10, 4, 3);
+    g.generateTexture('forest', TILE, TILE);
+    
+    // Riverbank terrain
+    g.clear();
+    g.fillStyle(0x3a4a4a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.fillStyle(0x2a5a6a);
+    g.fillRect(0, 6, TILE, 4);
+    g.generateTexture('riverbank', TILE, TILE);
+    
+    // Water
+    g.clear();
+    g.fillStyle(0x2a4a6a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.fillStyle(0x3a5a7a);
+    g.fillRect(3, 4, 5, 3);
+    g.fillRect(8, 9, 6, 3);
+    g.generateTexture('water', TILE, TILE);
+    
+    // Ruins terrain
+    g.clear();
+    g.fillStyle(0x4a4a5a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.fillStyle(0x5a5a6a);
+    g.fillRect(2, 2, 5, 5);
+    g.generateTexture('ruins', TILE, TILE);
+    
+    // Commons stone
+    g.clear();
+    g.fillStyle(0x4a4a4a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.lineStyle(1, 0x3a3a3a);
+    g.strokeRect(0, 0, TILE, TILE);
+    g.generateTexture('stone', TILE, TILE);
+    
+    // Plot grass
+    g.clear();
+    g.fillStyle(0x4a6a4a);
+    g.fillRect(0, 0, TILE, TILE);
+    g.generateTexture('plot', TILE, TILE);
+    
+    // Trading post
+    g.clear();
+    g.fillStyle(0x5a4030);
+    g.fillRect(2, 6, 12, 10);
+    g.fillStyle(0x7a5040);
+    g.fillRect(0, 2, 16, 5);
+    g.fillStyle(0xaa8060);
+    g.fillRect(4, 0, 8, 3);
+    g.generateTexture('trading_post', TILE, TILE);
+    
+    // Spawn markers
+    ['common', 'uncommon', 'rare', 'legendary'].forEach((rarity, i) => {
+      const colors = [0x888888, 0x7f7fef, 0xefef7f, 0xef7f7f];
+      g.clear();
+      g.fillStyle(0x000000, 0.3);
+      g.fillCircle(8, 10, 5);
+      g.fillStyle(colors[i]);
+      g.fillCircle(8, 8, 4);
+      g.fillStyle(0xffffff);
+      g.fillCircle(7, 6, 1);
+      g.generateTexture(`spawn_${rarity}`, TILE, TILE);
+    });
+    
+    // Tree
+    g.clear();
+    g.fillStyle(0x3a2a1a);
+    g.fillRect(6, 10, 4, 6);
+    g.fillStyle(0x2a5a2a);
+    g.fillCircle(8, 7, 6);
+    g.fillStyle(0x3a6a3a);
+    g.fillCircle(8, 5, 4);
+    g.generateTexture('tree', TILE, TILE);
+    
+    // Rock
+    g.clear();
+    g.fillStyle(0x5a5a5a);
+    g.fillCircle(8, 10, 6);
+    g.fillStyle(0x6a6a6a);
+    g.fillCircle(6, 8, 3);
+    g.generateTexture('rock', TILE, TILE);
+    
+    // Ruin pillar
+    g.clear();
+    g.fillStyle(0x6a6a7a);
+    g.fillRect(4, 4, 8, 12);
+    g.fillStyle(0x5a5a6a);
+    g.fillRect(5, 0, 6, 5);
+    g.generateTexture('pillar', TILE, TILE);
+  }
+
+  drawAreas() {
+    // Draw each area with its terrain
+    for (let y = 0; y < MAP_H; y++) {
+      for (let x = 0; x < MAP_W; x++) {
+        let tex = 'grass';
+        
+        const b = AREAS.hills.bounds;
+        if (x >= b.x && x < b.x + b.w && y >= b.y && y < b.y + b.h) tex = 'hills';
+        
+        const f = AREAS.forest.bounds;
+        if (x >= f.x && x < f.x + f.w && y >= f.y && y < f.y + f.h) tex = 'forest';
+        
+        const r = AREAS.riverbank.bounds;
+        if (x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h) {
+          tex = x >= r.x + r.w - 3 ? 'water' : 'riverbank';
+        }
+        
+        const u = AREAS.ruins.bounds;
+        if (x >= u.x && x < u.x + u.w && y >= u.y && y < u.y + u.h) tex = 'ruins';
+        
+        const c = AREAS.commons.bounds;
+        if (x >= c.x && x < c.x + c.w && y >= c.y && y < c.y + c.h) tex = 'stone';
+        
+        this.add.image(x * TILE + TILE/2, y * TILE + TILE/2, tex);
+      }
+    }
+    
+    // Area labels
+    Object.entries(AREAS).forEach(([key, area]) => {
+      if (key === 'commons') return;
+      const b = area.bounds;
+      const label = this.add.text(
+        (b.x + b.w/2) * TILE,
+        (b.y + 1) * TILE,
+        area.name.toUpperCase(),
+        { fontFamily: 'VT323', fontSize: '12px', color: '#ffffff', stroke: '#000000', strokeThickness: 2 }
+      );
+      label.setOrigin(0.5);
+      label.setAlpha(0.6);
+      label.setDepth(100);
+    });
+    
+    // Decorations
+    // Forest trees
+    [[2,9], [6,10], [1,14], [8,16], [3,19], [5,20]].forEach(([x,y]) => {
+      this.add.image(x * TILE + TILE/2, y * TILE + TILE/2, 'tree').setDepth(y);
+    });
+    
+    // Hill rocks  
+    [[12,2], [22,4], [28,3], [16,6], [30,5]].forEach(([x,y]) => {
+      this.add.image(x * TILE + TILE/2, y * TILE + TILE/2, 'rock').setDepth(y);
+    });
+    
+    // Ruin pillars
+    [[10,24], [18,25], [26,23], [30,26], [12,28]].forEach(([x,y]) => {
+      this.add.image(x * TILE + TILE/2, y * TILE + TILE/2, 'pillar').setDepth(y);
+    });
+  }
+
+  drawCommons() {
+    const c = AREAS.commons.bounds;
+    
+    // Trading post in center
+    const tpX = (c.x + c.w/2) * TILE;
+    const tpY = (c.y + 3) * TILE;
+    this.add.image(tpX, tpY, 'trading_post').setScale(2).setDepth(c.y + 3);
+    
+    const tpLabel = this.add.text(tpX, tpY + 24, 'TRADING POST', {
+      fontFamily: 'VT323', fontSize: '10px', color: '#efef7f', stroke: '#000000', strokeThickness: 2
+    });
+    tpLabel.setOrigin(0.5).setDepth(100);
+    
+    // Plots around commons
+    const plotPositions = [
+      { x: c.x + 1, y: c.y + 1 },
+      { x: c.x + c.w - 4, y: c.y + 1 },
+      { x: c.x + 1, y: c.y + c.h - 4 },
+      { x: c.x + c.w - 4, y: c.y + c.h - 4 },
+      { x: c.x + c.w/2 - 1.5, y: c.y + c.h - 4 },
+      { x: c.x + c.w/2 - 1.5, y: c.y + 1 },
+    ];
+    
+    plotPositions.forEach((pos, i) => {
+      // Plot ground
+      for (let py = 0; py < 3; py++) {
+        for (let px = 0; px < 3; px++) {
+          this.add.image((pos.x + px) * TILE + TILE/2, (pos.y + py) * TILE + TILE/2, 'plot');
+        }
+      }
+      // Border
+      const rect = this.add.rectangle(
+        (pos.x + 1.5) * TILE, (pos.y + 1.5) * TILE,
+        3 * TILE - 2, 3 * TILE - 2
+      );
+      rect.setStrokeStyle(1, 0x6a6a4a, 0.5);
+      rect.setFillStyle();
+    });
+    
+    // Commons label
+    const commonsLabel = this.add.text(
+      (c.x + c.w/2) * TILE, (c.y - 0.5) * TILE,
+      '◆ THE COMMONS ◆',
+      { fontFamily: 'VT323', fontSize: '11px', color: '#7a7a7a' }
+    );
+    commonsLabel.setOrigin(0.5).setDepth(100);
+  }
+
+  drawSpawns() {
+    SPAWNS.forEach(spawn => {
+      const tex = `spawn_${spawn.rarity}`;
+      const sprite = this.add.image(spawn.x * TILE + TILE/2, spawn.y * TILE + TILE/2, tex);
+      sprite.setDepth(spawn.y);
+      
+      // Pulsing effect for rare+
+      if (spawn.rarity === 'rare' || spawn.rarity === 'legendary') {
+        this.tweens.add({
+          targets: sprite,
+          scale: 1.2,
+          duration: 800,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut'
+        });
+      }
+      
+      // Hover label
+      sprite.setInteractive({ useHandCursor: true });
+      sprite.on('pointerover', () => {
+        if (!this.spawnLabel) {
+          this.spawnLabel = this.add.text(0, 0, '', {
+            fontFamily: 'VT323', fontSize: '10px', color: '#fff',
+            backgroundColor: '#000', padding: { x: 4, y: 2 }
+          }).setDepth(1000);
+        }
+        this.spawnLabel.setText(`${spawn.name} (${spawn.rarity})`);
+        this.spawnLabel.setPosition(sprite.x + 12, sprite.y - 12);
+        this.spawnLabel.setVisible(true);
+      });
+      sprite.on('pointerout', () => {
+        if (this.spawnLabel) this.spawnLabel.setVisible(false);
+      });
+      
+      this.spawnSprites[spawn.id] = sprite;
+    });
+  }
+
+  createAgents() {
+    AGENTS.forEach(agent => {
+      const area = AREAS[agent.area];
+      const b = area.bounds;
+      // Random position within area
+      const x = (b.x + 2 + Math.random() * (b.w - 4)) * TILE;
+      const y = (b.y + 2 + Math.random() * (b.h - 4)) * TILE;
+      
+      // Create agent sprite
+      this.createAgentTexture(agent);
+      const sprite = this.add.image(x, y, `agent_${agent.id}`);
+      sprite.setDepth(y / TILE + 0.5);
+      sprite.setInteractive({ useHandCursor: true });
+      sprite.agentData = agent;
+      
+      // Idle animation
+      this.tweens.add({
+        targets: sprite,
+        y: y - 2,
+        duration: 600 + Math.random() * 200,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+      
+      // Name label
+      const label = this.add.text(x, y + 12, agent.name, {
+        fontFamily: 'VT323', fontSize: '10px', color: '#fff',
+        stroke: '#000', strokeThickness: 2
+      });
+      label.setOrigin(0.5).setDepth(1000);
+      
+      // Interactions
+      sprite.on('pointerover', () => sprite.setScale(1.3));
+      sprite.on('pointerout', () => { if (this.selectedAgent !== sprite) sprite.setScale(1); });
+      sprite.on('pointerdown', () => this.selectAgent(sprite));
+      
+      this.agentSprites[agent.id] = { sprite, label, data: agent };
+    });
+  }
+
+  createAgentTexture(agent) {
+    const g = this.make.graphics({ add: false });
+    g.fillStyle(0x000000, 0.3);
+    g.fillEllipse(8, 14, 8, 3);
+    g.fillStyle(agent.color);
+    g.fillRoundedRect(4, 6, 8, 8, 2);
+    g.fillStyle(0xeeddcc);
+    g.fillCircle(8, 5, 4);
+    g.fillStyle(0x222222);
+    g.fillCircle(6, 4, 1);
+    g.fillCircle(10, 4, 1);
+    g.generateTexture(`agent_${agent.id}`, TILE, TILE);
+  }
+
+  selectAgent(sprite) {
+    if (this.selectedAgent) this.selectedAgent.setScale(1);
+    this.selectedAgent = sprite;
+    sprite.setScale(1.3);
+    this.updateAgentPanel(sprite.agentData);
+  }
+
+  updateAgentPanel(agent) {
+    const skillsHtml = Object.entries(agent.skills)
+      .map(([skill, level]) => `<div class="skill-row"><span class="skill-name">${skill}</span><span class="skill-level">${level}</span></div>`)
+      .join('');
+    
+    document.getElementById('agent-panel').innerHTML = `
+      <div class="panel-title">◆ Agent</div>
+      <div class="agent-header">
+        <div class="agent-avatar" style="background:#${agent.color.toString(16).padStart(6,'0')}20;border-color:#${agent.color.toString(16).padStart(6,'0')}">👤</div>
+        <div>
+          <div class="agent-name">${agent.name}</div>
+          <div class="agent-status">● ${agent.status}</div>
+          <div class="agent-location">📍 ${AREAS[agent.area].name}</div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Turns</div><div class="stat-value turns">⚡ ${agent.turns}/7</div></div>
+        <div class="stat"><div class="stat-label">Gold</div><div class="stat-value gold">● ${agent.gold}</div></div>
+      </div>
+      <div class="skills">
+        <div style="font-size:8px;color:#444;margin-bottom:4px;">SKILLS</div>
+        ${skillsHtml || '<div style="font-size:9px;color:#333;">No skills yet</div>'}
+      </div>
+    `;
+  }
+
+  populateSidebar() {
+    // Spawns list
+    const spawnList = document.getElementById('spawn-list');
+    SPAWNS.slice(0, 5).forEach(spawn => {
+      const div = document.createElement('div');
+      div.className = `spawn-item ${spawn.rarity}`;
+      div.innerHTML = `<span>${spawn.name}</span><span class="spawn-location">${AREAS[spawn.area].name}</span>`;
+      spawnList.appendChild(div);
+    });
+    
+    // Feed
+    const feedList = document.getElementById('feed-list');
+    FEED.forEach(item => {
+      const div = document.createElement('div');
+      div.className = `feed-item ${item.type}`;
+      div.innerHTML = `<div class="feed-time">${item.time}</div><span class="feed-actor">${item.actor}</span> ${item.text}`;
+      feedList.appendChild(div);
+    });
+  }
+
+  setupCamera() {
+    const worldW = MAP_W * TILE;
+    const worldH = MAP_H * TILE;
+    this.cameras.main.setBounds(0, 0, worldW, worldH);
+    this.cameras.main.centerOn(worldW / 2, worldH / 2);
+    this.cameras.main.setZoom(2);
+    
+    // Pan
+    this.input.on('pointermove', p => {
+      if (p.isDown) {
+        this.cameras.main.scrollX -= (p.x - p.prevPosition.x) / this.cameras.main.zoom;
+        this.cameras.main.scrollY -= (p.y - p.prevPosition.y) / this.cameras.main.zoom;
+      }
+    });
+    
+    // Zoom
+    this.input.on('wheel', (p, go, dx, dy) => {
+      const z = Phaser.Math.Clamp(this.cameras.main.zoom - dy * 0.002, 1, 4);
+      this.cameras.main.setZoom(z);
+    });
+  }
+
+  update() {
+    // Random agent movement
+    Object.values(this.agentSprites).forEach(({ sprite, label, data }) => {
+      if (Math.random() < 0.002) {
+        const area = AREAS[data.area];
+        const b = area.bounds;
+        const newX = (b.x + 2 + Math.random() * (b.w - 4)) * TILE;
+        const newY = (b.y + 2 + Math.random() * (b.h - 4)) * TILE;
+        
+        this.tweens.add({
+          targets: sprite,
+          x: newX,
+          y: newY,
+          duration: 2000,
+          ease: 'Sine.easeInOut',
+          onUpdate: () => {
+            label.x = sprite.x;
+            label.y = sprite.y + 12;
+            sprite.setDepth(sprite.y / TILE);
+          }
+        });
+      }
+    });
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+new Phaser.Game({
+  type: Phaser.AUTO,
+  parent: 'game-container',
+  width: document.getElementById('game-container').clientWidth,
+  height: document.getElementById('game-container').clientHeight,
+  backgroundColor: '#0a0a0c',
+  pixelArt: true,
+  scene: TownScene,
+  scale: { mode: Phaser.Scale.RESIZE, autoCenter: Phaser.Scale.CENTER_BOTH }
+});
+</script>
+</body>
+</html>
