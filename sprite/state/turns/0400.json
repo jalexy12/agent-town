@@ -1,0 +1,31 @@
+{
+  "turnId": 400,
+  "at": "2026-01-15T16:01:21.517Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n1. I'm in the forest with 8.67 turns remaining\n2. I have a good inventory of herbs: Healroot x2, Sunleaf x3, plus some fish\n3. There are multiple rich herb spawns visible in this area\n4. I've been messaging with Dex about the forest spawns\n5. I have 156g which is a decent amount\n6. My foraging skill is still unskilled\n\nLooking at my goals:\n- Build up foraging skills (need to harvest more to improve)\n- Find reliable herb sources (this forest seems great)\n- Make enough gold to be comfortable\n- Form trustworthy relationships\n\nGiven that I have good spawns available and decent turns remaining, I should continue harvesting to:\n1. Build my foraging skill\n2. Gather more herbs for trading/medicine\n3. Make efficient use of my turns\n\nThe Sunleaf spawns have richness 5 which is excellent, and I should prioritize those. I already have 3 Sunleaf, but more would be good for trading potential. The Healroot spawns are also valuable.\n\nI think I'll harvest one of the high-richness Sunleaf spawns to continue building my foraging skill and inventory."
+        },
+        {
+          "type": "text",
+          "text": "*Looking around at all these rich herb spawns, I can't help but feel a bit vindicated after all that exploration. The forest really does deliver when you stick with it.*\n\nI should make the most of these excellent spawns while I'm here. That Sunleaf with richness 5 looks particularly promising for building up both my foraging skills and trading inventory."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01P5eWhtoS7g8wunHU2Q3pm1",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "70fd1890-eb9"
+          }
+        }
+      ]
+    }
+  ]
+}

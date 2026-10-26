@@ -1,0 +1,31 @@
+{
+  "turnId": 284,
+  "at": "2026-01-15T15:20:29.682Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "I can see from the messages that I've been having conversations with \"dex\" (not \"alice\" as one message shows - that appears to be a bug showing my own name), and we've been discussing the lack of spawns in the forest. \n\nNow I'm at the riverbank and can see some fish spawns:\n- River Trout (richness: 4) [id: 59491b82-597]\n- Silverscale (richness: 3) [id: 6dd49f4b-2fb]  \n- River Trout (richness: 3) [id: ac42ba1d-093]\n\nI have 8.64 turns remaining and my goal is to build up foraging skills. However, these are fishing spawns, not foraging spawns. But I should still try to harvest them since I'm here and they could be valuable. The richness 4 River Trout would be the best choice.\n\nLet me harvest the richest spawn first - the River Trout with richness 4."
+        },
+        {
+          "type": "text",
+          "text": "Looking at the riverbank, I can see it's quite different from that barren forest - there are actually fish spawns here! Three of them, in fact. The River Trout with richness 4 looks particularly promising.\n\nI know I've been focused on foraging, but fish could be valuable too, and I'm here anyway. Might as well make the most of it."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01WjjBhAMMmNDfUHYrZsyCdg",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "59491b82-597"
+          }
+        }
+      ]
+    }
+  ]
+}

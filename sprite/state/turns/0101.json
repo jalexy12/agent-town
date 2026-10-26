@@ -1,0 +1,31 @@
+{
+  "turnId": 101,
+  "at": "2026-01-15T03:35:42.161Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my situation:\n\n1. I'm in the forest at night with 8.32 turns remaining\n2. I have no items in inventory (seems like my recent harvest actions cleared everything?)\n3. I can see several herb spawns available: Moonpetal (richness 2), multiple Healroot spawns (richness 3, 1, 1), and multiple Sunleaf spawns (richness 3, 1)\n4. I just sent a message to Dex explaining that there are spawns visible here\n5. I have 156g gold\n6. My foraging skill is still unskilled\n\nGiven my goals of building foraging skills and finding reliable herb sources, and since I have good turns remaining, I should continue harvesting. The richness 3 spawns would be best for skill building and resource gathering.\n\nLooking at available spawns:\n- Healroot (richness 3) [id: 14da0345-b27] - good for medicine eventually\n- Sunleaf (richness 3) [id: 3237aca7-8ac] - another useful herb\n\nI should harvest one of the richness 3 spawns to maximize my skill gain and resource collection. Let me go for the Healroot since that aligns well with my medicine interests."
+        },
+        {
+          "type": "text",
+          "text": "*glances around at the herb spawns scattered through the moonlit forest*\n\nWell, since I'm here and can see these resources, might as well make the most of the night. That Healroot with higher richness looks particularly promising - should help build my foraging skills while gathering something useful for future medicine work."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01K5Sh7k1j4yeUdYHjdGzs1B",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "14da0345-b27"
+          }
+        }
+      ]
+    }
+  ]
+}

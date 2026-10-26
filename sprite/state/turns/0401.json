@@ -1,0 +1,31 @@
+{
+  "turnId": 401,
+  "at": "2026-01-15T16:01:22.124Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n1. I'm in the forest with several other players (Clara, Dex, Eva)\n2. I have 8.67 turns remaining \n3. There are multiple good herb spawns visible:\n   - Multiple Sunleaf with richness 5 (very good for skill building)\n   - Multiple Healroot with richness 3-4 \n   - One Moonpetal with richness 1\n4. I've been messaging with Dex about the spawns\n5. My inventory has some herbs already but I could use more\n6. My foraging skill is still unskilled - I should work on that\n\nGiven my goals of building foraging skills and learning reliable herb sources, and the fact that there are excellent Sunleaf spawns (richness 5) right here, I should harvest one of those high-richness spawns to work on my foraging skill. The richness 5 spawns will give good skill advancement and take 2 turns to harvest.\n\nLooking at the Sunleaf spawns:\n- 70fd1890-eb9 (richness 5)\n- 8042a225-6cf (richness 5) \n\nI already harvested from 3002f1b9-e95, so I should pick one of the other two. Let me go with 70fd1890-eb9."
+        },
+        {
+          "type": "text",
+          "text": "Looking at all these rich herb spawns around me, I should make the most of this opportunity. That Sunleaf patch over there looks particularly promising - richness 5 should give me good foraging experience."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01GiyyV2LJmX1bQUrySoXWyA",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "70fd1890-eb9"
+          }
+        }
+      ]
+    }
+  ]
+}

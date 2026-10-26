@@ -75,10 +75,23 @@ interface PixiWorldProps {
 }
 
 export default function PixiWorld({ agents, selectedAgent, onSelectAgent }: PixiWorldProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setReady(true)
+    }
+  }, [])
+
   return (
-    <Application background={COLORS.bg} resizeTo={window} antialias>
-      <WorldScene agents={agents} selectedAgent={selectedAgent} onSelectAgent={onSelectAgent} />
-    </Application>
+    <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+      {ready && containerRef.current && (
+        <Application background={COLORS.bg} resizeTo={containerRef.current} antialias>
+          <WorldScene agents={agents} selectedAgent={selectedAgent} onSelectAgent={onSelectAgent} />
+        </Application>
+      )}
+    </div>
   )
 }
 
@@ -553,7 +566,7 @@ function AgentSprite({
       y={pos.y + yBob}
       eventMode="static"
       cursor="pointer"
-      onpointertap={onSelect}
+      onPointerTap={onSelect}
     >
       <pixiGraphics draw={draw} />
       <pixiText text={agent.name} style={nameStyle} anchor={0.5} y={14} />

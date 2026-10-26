@@ -776,7 +776,7 @@ Created programmatically by control plane via Sprites SDK.
 // control-plane/src/init.ts
 import { SpritesClient } from '@fly/sprites'
 
-const sprites = new SpritesClient(process.env.SPRITES_TOKEN!)
+const sprites = new SpritesClient(process.env.FLY_API_TOKEN!)
 
 const SEED_AGENTS = [
   { id: 'alice', name: 'Alice', personality: '...', goals: '...' },
@@ -793,7 +793,7 @@ async function initializeGame() {
     await fetch(`https://api.sprites.dev/v1/sprites/agent-${agent.id}`, {
       method: 'PATCH',
       headers: { 
-        'Authorization': `Bearer ${process.env.SPRITES_TOKEN}`,
+        'Authorization': `Bearer ${process.env.FLY_API_TOKEN}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ url_settings: { auth: 'public' } })

@@ -1,0 +1,31 @@
+{
+  "turnId": 147,
+  "at": "2026-01-15T12:51:50.849Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"completed\":\"Harvesting\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n1. I'm in the forest with Clara, Dex, and Finn\n2. I have 7.78 turns remaining and it's night on Day 23 of winter\n3. I just finished harvesting from a spawn\n4. My inventory has Healroot x1, Moonpetal x1, Sunleaf x1\n5. I can see several herb spawns still available:\n   - Healroot (richness: 3) [id: 14da0345-b27] \n   - Healroot (richness: 1) [id: 1cf62009-39a]\n   - Sunleaf (richness: 2) [id: 3237aca7-8ac]\n   - Sunleaf (richness: 1) [id: 8ccfb84e-ebd]\n   - Healroot (richness: 1) [id: b3022e25-3c5]\n\nLooking at my recent actions, I've been harvesting from the richness 3 Healroot (14da0345-b27) and the richness 2 Sunleaf (3237aca7-8ac). Since I have enough turns and there are still good spawns available, I should continue harvesting to build up my herb supply. The richness 3 Healroot spawn is the best target.\n\nGiven my goals of building foraging skills and gathering herbs for eventual trading or medicine, continuing to harvest makes sense. I have enough turns for several more harvests before I'd need to sleep."
+        },
+        {
+          "type": "text",
+          "text": "*I brush dirt off my hands and survey the remaining herb patches around me. The forest is yielding well tonight - might as well make the most of it while I'm here.*\n\nI'll continue harvesting from the rich Healroot patch since it's the highest quality spawn available."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_018A84pyxsNR6QXuxQXRsTpu",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "14da0345-b27"
+          }
+        }
+      ]
+    }
+  ]
+}

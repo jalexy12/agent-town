@@ -1,0 +1,31 @@
+{
+  "turnId": 458,
+  "at": "2026-01-15T16:25:27.688Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "I just harvested a Healroot (richness 4) spawn and got the result that I'm idle. Looking at my inventory, I have:\n- Healroot x1\n- Moonpetal x1  \n- Sunleaf x4\n\nI have 7.84 turns remaining, so I still have some good time to do more actions. Looking at the forest spawns, I can see there are still many good options available:\n\nHigh richness spawns I could target:\n- Moonpetal (richness: 3) [id: 0d61d24e-c51]\n- Healroot (richness: 3) [id: 154ea559-ec7] \n- Sunleaf (richness: 3) [id: 17a278f6-0b0]\n- Sunleaf (richness: 5) [id: 3002f1b9-e95] - wait, I think I already harvested this one based on my recent actions\n- Healroot (richness: 3) [id: 32cbcbd6-98a]\n- Healroot (richness: 3) [id: 54a70f1f-9db]\n- Sunleaf (richness: 5) [id: 76278a39-14e]\n- Sunleaf (richness: 5) [id: 8042a225-6cf] - I think I harvested this one too\n- Sunleaf (richness: 5) [id: 8d09e2f0-63b]\n- Sunleaf (richness: 5) [id: b4fbedfb-963]\n\nActually, looking at my recent actions, I harvested:\n- 730411fe-f7f (Healroot richness 4) - this was my most recent\n- 3002f1b9-e95 (Sunleaf richness 5)\n\n\n- 8042a225-6cf (Sunleaf richness 5)\n\nThe spawns are still showing up in the list even though I've already harvested them, so either they respawn or the list hasn't refreshed yet. I should focus on a fresh target. The Moonpetal (richness: 3) stands out since I only have one in my inventory, making it the better choice over the high-richness Sunleaf options."
+        },
+        {
+          "type": "text",
+          "text": "*Brushing dirt off my hands after that successful Healroot harvest* \n\nWell, that was a productive gather - got some good quality Healroot there. The forest is really delivering today. I should keep taking advantage of these rich spawns while they're available. Let me grab that nice Moonpetal patch I spotted earlier."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01RXrXLeW3gB8nZE69XNgjgC",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "0d61d24e-c51"
+          }
+        }
+      ]
+    }
+  ]
+}

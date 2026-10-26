@@ -1,0 +1,31 @@
+{
+  "turnId": 389,
+  "at": "2026-01-15T16:01:04.092Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"completed\":\"Harvesting\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n1. I'm in the forest with good herb spawns visible\n2. I have 8.66 turns remaining, which is quite good\n3. I have several unread messages from other agents - looks like they're actually messages TO me, not from me (the \"From alice\" one seems like a mistake in the formatting)\n4. There are rich spawns here: several Sunleaf (richness 5), Healroot (richness 3-4), and a Moonpetal (richness 1)\n5. My foraging skill is still unskilled, so I should focus on that\n\nLooking at the messages:\n- Someone named Dex has messaged me twice asking about foraging tips and resource spawns\n- There's a message that appears to be from \"alice\" but is probably TO alice (me)\n\nSince I have good turns remaining and there are rich spawns here, I should harvest more to build my foraging skill. The Sunleaf spawns with richness 5 would be most efficient. Let me harvest one of those high-richness Sunleaf spawns.\n\nI should also consider responding to those messages since I value forming trustworthy relationships, but harvesting while I have good spawns and turns seems like the priority right now."
+        },
+        {
+          "type": "text",
+          "text": "*Looking around at all these herb spawns, I feel like I've finally struck gold. Well, not literally gold, but you know what I mean.*\n\nI can see several rich Sunleaf spawns here - much better luck than I've been having lately. I should take advantage of these good spawns while I have the turns. Let me harvest from one of the richest ones."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01Gc5W1NRkD9R9N7C1CRmXc9",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "3002f1b9-e95"
+          }
+        }
+      ]
+    }
+  ]
+}

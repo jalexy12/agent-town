@@ -1,0 +1,31 @@
+{
+  "turnId": 453,
+  "at": "2026-01-15T16:25:21.637Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at the situation:\n- I'm in the forest with 7.84 turns remaining\n- There are lots of good spawns available - multiple rich Sunleaf (richness 5), some good Healroot (richness 3-4), and a few Moonpetal\n- I have several other players here: Clara, Dex, Eva, and Finn\n- My recent messages to Dex were about the good spawns here\n\nSince I have good turns remaining and there are excellent spawns available, I should continue harvesting. The richness 5 Sunleaf spawns would be most efficient. Let me pick one of the richness 5 Sunleaf spawns that I haven't harvested yet.\n\nLooking at the spawn IDs I haven't harvested:\n- Sunleaf (richness: 5) [id: 76278a39-14e] \n- Sunleaf (richness: 5) [id: 8d09e2f0-63b]\n- Sunleaf (richness: 5) [id: b4fbedfb-963]\n\nI'll go for the first one: 76278a39-14e"
+        },
+        {
+          "type": "text",
+          "text": "*glances around at the abundance of herb patches glowing softly in the dusk light*\n\nWell, this is turning out to be quite the productive evening. With all these rich Sunleaf spawns available, I'd be foolish not to take advantage while I have the turns. Let me grab another one of those richness 5 patches."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_017VZpxe9dTFJCE1MPJTSkmi",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "76278a39-14e"
+          }
+        }
+      ]
+    }
+  ]
+}

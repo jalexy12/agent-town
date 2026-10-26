@@ -1,0 +1,31 @@
+{
+  "turnId": 195,
+  "at": "2026-01-15T14:39:11.407Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my situation:\n\n1. I'm in the forest with Clara and Dex\n2. I have 8.62 turns remaining \n3. There are still herb spawns available here - two more Sunleaf spawns and one more Healroot\n4. I have some confusing messages in my inbox, including what appears to be messages from myself to other people, which doesn't make sense\n\nThe messages are very strange - they show \"From alice\" but they're messages I apparently sent to Clara and Dex. This seems like a system bug or interface issue. The content of these messages makes sense as things I might have said when first meeting people, but they're showing up as unread messages from myself which is odd.\n\nGiven that I'm here with available herb spawns and decent turns remaining, I should continue harvesting. The Sunleaf spawn with richness 2 (id: 8ccfb84e-ebd) would be a good choice since higher richness typically means better yield.\n\nMy goals are to build foraging skills and gather herbs, so continuing to harvest makes sense. I can address the strange message situation later or just ignore it if it's a display bug."
+        },
+        {
+          "type": "text",
+          "text": "*I glance around the forest, noting the remaining herb patches. That message situation is bizarre - shows messages \"from alice\" that I apparently sent? Must be some kind of interface glitch. More pressing matters at hand though.*\n\nThe night air is crisp, but there are still good herbs here waiting to be gathered. That larger Sunleaf patch looks promising."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01PysjBaSBABfsLNHZFeapT5",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "8ccfb84e-ebd"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -15,13 +15,45 @@ export interface GameState {
   agents: Agent[]
   day: number
   season: string
+  timeOfDay: string
+}
+
+// Claude's content block types
+export type ContentBlock =
+  | { type: 'thinking'; thinking: string }
+  | { type: 'text'; text: string }
+  | { type: 'tool_use'; id: string; name: string; input: Record<string, unknown> }
+
+// Claude's Message response
+export interface Message {
+  content: ContentBlock[]
+}
+
+export interface ActivityEvent {
+  id: string
+  time: string
+  agent: string
+  message: Message
 }
 
 interface SSEEvent {
-  type: 'TRAVEL' | 'EXPLORE' | 'WAIT' | 'connected'
+  type: 'TURN' | 'TIME_UPDATE' | 'SEASON_CHANGE' | 'AGENT_UPDATE' | 'connected'
   agentId?: string
-  area?: Agent['area']
-  thoughts?: string
+  message?: Message
+  // TIME_UPDATE fields
+  day?: number
+  timeOfDay?: string
+  season?: string
+  // AGENT_UPDATE fields - agent state from DB
+  agent?: {
+    id: string
+    name: string
+    area: Agent['area']
+    status: Agent['status']
+    gold: number
+    turns: string | number
+    currentAction: string | null
+  }
 }
 
 // Module-level singleton to survive React Strict Mode
@@ -45,7 +77,7 @@ export function useGameEvents() {
     // Only create connection on first mount
     if (!globalEventSource) {
       console.log('[SSE] Connecting to control plane...')
-      globalEventSource = new EventSource('http://localhost:4000/events')
+      globalEventSource = new EventSource(`${import.meta.env.VITE_API_URL}/events`)
 
       globalEventSource.onopen = () => {
         console.log('[SSE] Connected')
@@ -64,43 +96,101 @@ export function useGameEvents() {
       try {
         const data = JSON.parse(event.data) as SSEEvent
 
-        if (data.type === 'TRAVEL' && data.agentId && data.area) {
-          console.log(`[SSE] Agent ${data.agentId} traveling to ${data.area}`)
+        // Helper to get agent name from ID
+        const getAgentName = (agentId: string) => {
+          const gameState = queryClient.getQueryData<GameState>(['game-state'])
+          const agent = gameState?.agents.find((a) => a.id === agentId)
+          return agent?.name || agentId
+        }
+
+        if (data.type === 'TURN' && data.agentId && data.message) {
+          const agentName = getAgentName(data.agentId)
+          const toolUses = data.message.content.filter(b => b.type === 'tool_use')
+          console.log(`[SSE] Agent ${data.agentId} turn:`, toolUses.map(t => t.type === 'tool_use' ? t.name : '').join(', '))
+
+          // Update game state based on tool uses
+          for (const block of data.message.content) {
+            if (block.type !== 'tool_use') continue
+
+            const { name, input } = block
+
+            queryClient.setQueryData<GameState>(['game-state'], (old) => {
+              if (!old) return old
+              const agent = old.agents.find(a => a.id === data.agentId)
+              if (!agent) return old
+
+              let updates: Partial<Agent> = {}
+
+              if (name === 'travel' && input.area) {
+                updates = { area: input.area as Agent['area'], action: `Traveling to ${input.area}`, status: 'busy' }
+              } else if (name === 'explore') {
+                updates = { action: `Exploring ${agent.area}`, status: 'busy' }
+              } else if (name === 'wait') {
+                updates = { action: 'Waiting', status: 'idle' }
+              } else if (name === 'sleep') {
+                updates = { action: 'Sleeping', status: 'sleeping' }
+              } else if (name === 'harvest') {
+                updates = { action: 'Harvesting', status: 'busy' }
+              }
+
+              return {
+                ...old,
+                agents: old.agents.map(a => a.id === data.agentId ? { ...a, ...updates } : a),
+              }
+            })
+          }
+
+          // Add to activity log
+          const now = new Date()
+          const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`
+
+          queryClient.setQueryData<ActivityEvent[]>(['activity-events'], (old = []) => [
+            { id: `${Date.now()}-${Math.random()}`, time: timeStr, agent: agentName, message: data.message! },
+            ...old,
+          ])
+        }
+
+        if (data.type === 'TIME_UPDATE') {
+          console.log(`[SSE] Time update: Day ${data.day}, ${data.timeOfDay}, ${data.season}`)
           queryClient.setQueryData<GameState>(['game-state'], (old) => {
             if (!old) return old
             return {
               ...old,
-              agents: old.agents.map((a) =>
-                a.id === data.agentId
-                  ? { ...a, area: data.area!, action: `Traveling to ${data.area}`, status: 'busy' }
-                  : a
-              ),
+              day: data.day ?? old.day,
+              timeOfDay: data.timeOfDay ?? old.timeOfDay,
+              season: data.season ?? old.season,
             }
           })
-        } else if (data.type === 'EXPLORE' && data.agentId) {
-          console.log(`[SSE] Agent ${data.agentId} exploring ${data.area}`)
+        }
+
+        if (data.type === 'SEASON_CHANGE') {
+          console.log(`[SSE] Season changed to ${data.season}`)
           queryClient.setQueryData<GameState>(['game-state'], (old) => {
             if (!old) return old
             return {
               ...old,
-              agents: old.agents.map((a) =>
-                a.id === data.agentId
-                  ? { ...a, action: `Exploring ${a.area}`, status: 'busy' }
-                  : a
-              ),
+              season: data.season ?? old.season,
+              day: data.day ?? old.day,
             }
           })
-        } else if (data.type === 'WAIT' && data.agentId) {
-          console.log(`[SSE] Agent ${data.agentId} waiting`)
+        }
+
+        // AGENT_UPDATE - authoritative state from DB after actions
+        if (data.type === 'AGENT_UPDATE' && data.agent) {
+          const { agent } = data
+          console.log(`[SSE] Agent update: ${agent.name} now in ${agent.area}, status=${agent.status}`)
           queryClient.setQueryData<GameState>(['game-state'], (old) => {
             if (!old) return old
             return {
               ...old,
-              agents: old.agents.map((a) =>
-                a.id === data.agentId
-                  ? { ...a, action: 'Waiting', status: 'idle' }
-                  : a
-              ),
+              agents: old.agents.map(a => a.id === agent.id ? {
+                ...a,
+                area: agent.area,
+                status: agent.status,
+                action: agent.currentAction ?? 'Idle',
+                turns: typeof agent.turns === 'string' ? parseFloat(agent.turns) : agent.turns,
+                gold: agent.gold,
+              } : a),
             }
           })
         }

@@ -1,0 +1,31 @@
+{
+  "turnId": 151,
+  "at": "2026-01-15T12:51:53.260Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"completed\":\"Harvesting\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at the situation:\n\n- I'm in the forest with Clara, Dex, and Finn\n- I have 7.78 turns remaining  \n- I just finished harvesting and got some herbs\n- I can see several herb spawns still available\n- I have 124g and a small collection of herbs (Healroot x1, Moonpetal x1, Sunleaf x1)\n\nMy goals are to build foraging skills, learn the land, find reliable herb sources, and make enough gold to be comfortable. I also want to form trustworthy relationships.\n\nI sent Dex a message about the herb spawns here, but I notice there are no new messages, so either they haven't responded yet or they're busy.\n\nLooking at the available spawns:\n- Healroot (richness: 1) [id: 1cf62009-39a] - 1 turn to harvest\n- Sunleaf (richness: 1) [id: 8ccfb84e-ebd] - 1 turn to harvest  \n- Healroot (richness: 1) [id: b3022e25-3c5] - 1 turn to harvest\n\nI have enough turns to harvest a few more before I need to sleep. Since I'm building foraging skills and these are reliable herb sources, I should continue harvesting while I'm here. The richness 1 spawns will take 1 turn each.\n\nI'll harvest one of the remaining Healroot spawns since those seem useful for medicine."
+        },
+        {
+          "type": "text",
+          "text": "*I brush dirt off my hands from the last harvest, satisfied with the steady work. The forest is proving to be a reliable source of herbs, just as I'd hoped.*\n\nGood, another successful harvest. I can see there are still several more herb patches here - might as well make the most of this productive spot while I have the energy."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01HjxFPyCLZKAFnRdY3xM7EW",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "1cf62009-39a"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "turnId": 105,
+  "at": "2026-01-15T03:35:52.414Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "I see I just completed harvesting from the rich Healroot spawn (14da0345-b27) and the result shows {\"idle\":true}, which means the spawn is probably exhausted now. Looking at the situation:\n\n- I'm in the forest at night with 7.45 turns remaining\n- I have 1 Healroot and 1 Sunleaf in inventory\n- There are still several spawns available here:\n  - Moonpetal (richness: 2) \n  - Healroot (richness: 1) x2\n  - Sunleaf (richness: 3) and (richness: 1)\n\nSince I'm focused on building foraging skills and collecting herbs, I should continue harvesting while I'm here. The richest remaining spawn is the Sunleaf with richness 3 (id: 3237aca7-8ac). That would be a good target.\n\nI also notice there are other players here (Dex and Finn) - I should keep an eye on them since I'm cautious with strangers.\n\nLet me harvest the rich Sunleaf spawn next."
+        },
+        {
+          "type": "text",
+          "text": "*glances around at the other foragers in the moonlit forest, then eyes the promising sunleaf patch*\n\nWell, that healroot spawn is thoroughly picked clean. Might as well make the most of this forest visit while I'm here."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01XjtwXig2u3JL6K8NvkPhxG",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "3237aca7-8ac"
+          }
+        }
+      ]
+    }
+  ]
+}

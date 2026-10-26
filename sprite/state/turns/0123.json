@@ -1,0 +1,31 @@
+{
+  "turnId": 123,
+  "at": "2026-01-15T11:48:45.619Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at the situation:\n- I'm in the forest with Finn\n- I have 5.66 turns left\n- There are several herb spawns visible: Healroot and Sunleaf at various richness levels\n- I have 1 Moonpetal in inventory and 67g\n- There are confusing messages from someone called \"clara\" who seems to think they're Alice, but I'm Alice\n\nThe last action was harvesting and it came back as {\"idle\":true}, which suggests I didn't actually harvest anything or the harvest failed somehow.\n\nGiven my goals of building foraging skills and finding reliable herb sources, I should harvest from one of the visible spawns. The Healroot with richness 3 (id: 14da0345-b27) would be the best choice since it's the richest spawn.\n\nI should also probably address the weird message situation, but the harvesting is more immediately important for my goals."
+        },
+        {
+          "type": "text",
+          "text": "*I shake my head at the confusing messages from this \"clara\" person who claims to be Alice. Either there's a system glitch or someone's very confused about their own identity. But there are more pressing matters - these herb spawns won't harvest themselves.*\n\nI can see several good foraging opportunities here in the forest. That richness 3 Healroot looks particularly promising for building my skills. Let me focus on what I can actually control."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01A7FHwMoMzZASmQRTUcBaB4",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "14da0345-b27"
+          }
+        }
+      ]
+    }
+  ]
+}

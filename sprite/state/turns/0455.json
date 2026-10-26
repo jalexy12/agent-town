@@ -1,0 +1,31 @@
+{
+  "turnId": 455,
+  "at": "2026-01-15T16:25:24.646Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me assess my current situation:\n\n- I'm in the forest with 7.84 turns remaining\n- I have a good collection of herbs: 1 Healroot, 1 Moonpetal, 4 Sunleaf\n- There are many spawns around me, including some high-richness ones\n- It's dusk on Day 38 of summer\n- I have 124 gold\n- There are other players here: Clara, Dex, Eva, and Finn\n\nMy recent actions show I was harvesting successfully. Looking at the spawns available, I can see several high-richness options:\n- Sunleaf richness 5: ids 76278a39-14e, 8d09e2f0-63b, b4fbedfb-963\n- Healroot richness 4: id 730411fe-f7f (but I just harvested this one based on recent actions)\n- Healroot richness 3: multiple options\n- Moonpetal richness 3: id 0d61d24e-c51\n\nSince I have plenty of turns left and I'm focused on building up foraging skills and gathering herbs, I should continue harvesting. The richness 5 Sunleaf spawns would be excellent targets since they'll give me more resources and likely better experience for my foraging skill.\n\nLet me harvest one of the richness 5 Sunleaf spawns. I'll pick 76278a39-14e."
+        },
+        {
+          "type": "text",
+          "text": "Looking at all these herb spawns around me, it's like a forager's paradise. The forest is practically bursting with resources right now. With nearly 8 turns left and some excellent high-richness spawns visible, I should keep gathering while the getting's good.\n\nThat richness 5 Sunleaf patch looks particularly promising - might as well make the most of this abundance."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01ERBkXLxYkuVUei8RXLGGKQ",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "76278a39-14e"
+          }
+        }
+      ]
+    }
+  ]
+}

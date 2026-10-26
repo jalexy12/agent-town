@@ -98,6 +98,91 @@ See `docs/architecture.md` for full schema definitions.
 3. **Discovery learning**: Agents don't start knowing area probabilities - they learn through experience
 4. **Interdependence**: Skills feed into each other, encouraging trade and cooperation
 
+## Deployment & Operations
+
+### Production URLs
+- **Control Plane**: https://agent-town-control.fly.dev
+- **UI**: https://ui-delta-vert.vercel.app
+- **Sprites**: https://agent-town-{agentId}-etkf.sprites.app
+
+### Deploy Commands
+```bash
+# Control plane (Fly.io) - causes ~5s restart
+cd control-plane && ~/.fly/bin/flyctl deploy
+
+# UI (Vercel) - zero downtime
+cd ui && vercel --prod
+
+# Sprites - NOT auto-updated by deploys
+# Must use sprites:setup or manual hot-load
+bun run sprites:setup
+```
+
+### Sprite Code Updates (CRITICAL)
+Sprites are NOT updated when you deploy the control plane. They have baked-in code.
+
+**Version coordination**: Both sprite and control plane track code versions:
+- `sprite/src/index.ts`: `CODE_VERSION = '2026-01-16-v3'`
+- `control-plane/src/index.ts`: `EXPECTED_CODE_VERSION = '2026-01-16-v3'`
+
+**Safe hot-loading (PREFERRED):**
+```bash
+# 1. Edit sprite/src/index.ts (don't touch CODE_VERSION manually)
+# 2. Run the update script - handles everything automatically:
+bun run sprites:update
+```
+
+This script:
+- Pauses scheduler (DB-backed, survives restarts)
+- Auto-increments version
+- Updates all 6 sprites in parallel
+- Creates checkpoints before update (rollback possible)
+- Verifies each sprite has new version
+- Updates control plane version
+- Deploys control plane
+- Resumes scheduler
+
+**Full reset (wipes state):**
+```bash
+bun run sprites:setup  # Reinstalls everything, wipes diary/turn history
+```
+
+### Common Issues & Fixes
+
+**502 Bad Gateway from sprites**
+- Cause: Scheduler calling sprites without waking them first
+- Check: `wakeSprite()` must be called before HTTP fetch to sprite
+- Fix: Ensure scheduler.ts imports and uses `wakeSprite` from index.ts
+
+**Sprites not starting after hot-load**
+- Cause: Manual code push broke something (syntax error, missing deps)
+- Fix: Run `bun run sprites:setup` to reinstall everything clean
+- Note: This wipes sprite soft state (diary, turn history)
+
+**Duplicate scheduler runs**
+- Cause: Multiple Fly machines running
+- Fix: `~/.fly/bin/flyctl scale count 1 --yes -a agent-town-control`
+- Prevention: Set `auto_stop_machines = "off"` in fly.toml
+
+**CORS errors in browser**
+- Cause: UI domain not in control plane CORS whitelist
+- Fix: Add domain to `cors()` config in `control-plane/src/index.ts`
+
+### Useful Debug Commands
+```bash
+# Tail control plane logs
+~/.fly/bin/flyctl logs -a agent-town-control
+
+# Check sprite status
+bun run sprites:status
+
+# Read sprite logs
+bun run scripts/read-logs.ts <agentId>
+
+# Scale Fly machines
+~/.fly/bin/flyctl scale show -a agent-town-control
+```
+
 ## Known Limitations
 
 **SSE Scaling**: HTTP/1.1 limits to 6 connections per domain (browser-enforced), HTTP/2 supports ~100-200 streams. For >1000 concurrent viewers, need pub/sub layer (Redis) or horizontal scaling. Acceptable for v1, needs addressing at scale.

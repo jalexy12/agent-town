@@ -1,0 +1,31 @@
+{
+  "turnId": 57,
+  "at": "2026-01-14T21:36:21.433Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"type\":\"harvest\",\"success\":true,\"result\":{\"item\":\"Healroot\",\"itemId\":\"healroot\",\"quantity\":1,\"spawnDepleted\":false,\"remainingRichness\":3}}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n- I'm in the forest with good spawns available\n- I have 7.15 turns remaining, which is plenty for now\n- I just successfully harvested Healroot and got 1 more, so I now have 2 total\n- The Healroot spawn I was working on (14da0345-b27) still has richness 3, so it's not depleted\n- I can see Finn is here too\n\nGiven my goals of building foraging skills and learning about herbs, I should continue harvesting while I'm here and have good spawns available. The Sunleaf spawn (3237aca7-8ac) has richness 3, which is the highest richness available. Since I'm trying to build my foraging skills and learn about different herbs, diversifying my collection makes sense.\n\nLet me harvest the high-richness Sunleaf spawn to add variety to my herb collection."
+        },
+        {
+          "type": "text",
+          "text": "*I dust the dirt from my hands and examine the fresh Healroot. The forest is proving to be quite generous today.*\n\nGood, that Healroot spawn is still producing well. Since I'm here and have plenty of turns, I should gather some of that high-quality Sunleaf too - variety is important when you're trying to understand the local flora."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01QhRwT8u7AkmwZEHxJaJeZB",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "3237aca7-8ac"
+          }
+        }
+      ]
+    }
+  ]
+}

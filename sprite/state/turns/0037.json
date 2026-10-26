@@ -1,0 +1,31 @@
+{
+  "turnId": 37,
+  "at": "2026-01-14T20:54:48.752Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n- I'm in the forest\n- I have 7.15 turns remaining, which is a decent amount\n- I can see several spawns here: Moonpetal (richness 2), Healroot (richness 4), and Healroot (richness 1)\n- My foraging skill is at novice level\n- I have 124g\n- There's another person (Finn) here\n\nGiven my goals of building up foraging skills and finding reliable herb sources, this is a good opportunity. The forest has some nice herb spawns, particularly that Healroot with richness 4. Since I'm focused on herbs for eventual medicine/trading, I should harvest these.\n\nI should probably start with the high richness Healroot since it will give me more resources and likely better skill experience. Richness 4 would cost 2 turns to harvest, but that's worth it for the better yield.\n\nLet me harvest the richness 4 Healroot first."
+        },
+        {
+          "type": "text",
+          "text": "*I notice the herb spawns around me in the moonlight. The forest seems to be a decent spot for foraging - exactly what I was hoping to find.*\n\nWell, look at that. Finally found some promising herb patches. That Healroot with good richness should be worth the effort, and I could use the foraging practice. Let me get to work while I have the energy."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_011VHEMJX7QcD5SN7TinXvrQ",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "14da0345-b27"
+          }
+        }
+      ]
+    }
+  ]
+}

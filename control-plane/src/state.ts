@@ -1,35 +1,58 @@
+import { agents, inventory, skills, world } from './db/repositories'
+import type { Agent as DbAgent } from './db/repositories/agents'
+
 export type Area = 'forest' | 'hills' | 'riverbank' | 'ruins' | 'commons'
 
 export interface Agent {
   id: string
   name: string
   area: Area
-  status: 'idle' | 'busy'
+  status: 'idle' | 'busy' | 'sleeping' | 'offline'
   action: string
   turns: number
   gold: number
 }
 
-// In-memory game state - matches UI mock data
-export const agents = new Map<string, Agent>([
-  ['alice', { id: 'alice', name: 'Alice', area: 'forest', status: 'busy', action: 'Harvesting Moonpetal', turns: 7, gold: 124 }],
-  ['bob', { id: 'bob', name: 'Bob', area: 'hills', status: 'busy', action: 'Exploring', turns: 3, gold: 89 }],
-  ['clara', { id: 'clara', name: 'Clara', area: 'commons', status: 'idle', action: 'At trading post', turns: 10, gold: 312 }],
-  ['dex', { id: 'dex', name: 'Dex', area: 'riverbank', status: 'busy', action: 'Fishing', turns: 5, gold: 67 }],
-  ['eva', { id: 'eva', name: 'Eva', area: 'ruins', status: 'idle', action: 'Resting', turns: 2, gold: 201 }],
-  ['finn', { id: 'finn', name: 'Finn', area: 'forest', status: 'busy', action: 'Traveling to Hills', turns: 8, gold: 156 }],
-])
-
 export interface GameState {
   agents: Agent[]
   day: number
   season: string
+  timeOfDay: string
 }
 
-export function getGameState(): GameState {
+// Transform DB row to API shape
+function toAgent(row: DbAgent): Agent {
   return {
-    agents: Array.from(agents.values()),
-    day: 27,
-    season: 'spring',
+    id: row.id,
+    name: row.name,
+    area: row.area as Area,
+    status: row.status as Agent['status'],
+    action: row.currentAction ?? 'Idle',
+    turns: Number(row.turns), // DECIMAL comes as string
+    gold: row.gold ?? 0,
   }
+}
+
+export async function getGameState(): Promise<GameState> {
+  const [agentRows, worldState] = await Promise.all([
+    agents.getAllAgents(),
+    world.getAll(),
+  ])
+
+  return {
+    agents: agentRows.map(toAgent),
+    day: worldState.day?.valueInt ?? 1,
+    season: worldState.season?.valueText ?? 'spring',
+    timeOfDay: worldState.time_of_day?.valueText ?? 'day',
+  }
+}
+
+export async function getAgent(id: string): Promise<Agent | null> {
+  const row = await agents.getAgent(id)
+  return row ? toAgent(row) : null
+}
+
+export async function getAgentsByArea(area: Area): Promise<Agent[]> {
+  const rows = await agents.getAgentsByArea(area)
+  return rows.map(toAgent)
 }

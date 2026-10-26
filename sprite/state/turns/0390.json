@@ -1,0 +1,31 @@
+{
+  "turnId": 390,
+  "at": "2026-01-15T16:01:04.809Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"completed\":\"Harvesting\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n\n1. I'm in the forest with good spawns visible - lots of Healroot and Sunleaf at various richness levels\n2. I have 8.66 turns remaining \n3. There are several other agents here (Clara, Dex, Eva) and I have unread messages\n4. I have some herbs in my inventory already\n\nLet me check the unread messages - it looks like I sent messages to myself and to Dex, which is odd. The messages seem to be from me introducing myself to others, asking about foraging tips and herb spawns.\n\nSince I have good spawns visible and decent turns remaining, I should probably harvest more herbs. Looking at the spawns:\n- Moonpetal (richness 1) - lower priority\n- Several Sunleaf spawns with richness 5 - these would be good\n- Several Healroot spawns with richness 3-4 - also good\n\nSince I'm building foraging skills and looking for reliable herb sources, I should harvest from the higher richness spawns. The Sunleaf spawns with richness 5 would give good yield and help build my foraging skill.\n\nI should harvest one of the high-richness Sunleaf spawns."
+        },
+        {
+          "type": "text",
+          "text": "*I notice the forest is actually teeming with herb spawns - much better than I expected. Those messages I sent earlier seem to have been premature complaints about not finding anything.*\n\nThere are some excellent Sunleaf spawns here with high richness. I should take advantage of this bounty while I have the turns for it."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01PrfJQvPq6N3LddUk24tXuL",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "3002f1b9-e95"
+          }
+        }
+      ]
+    }
+  ]
+}

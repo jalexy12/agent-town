@@ -1,0 +1,31 @@
+{
+  "turnId": 454,
+  "at": "2026-01-15T16:25:23.465Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "I just completed harvesting Healroot with richness 4, and I'm looking at the current situation. I have 7.84 turns remaining, it's dusk on day 38, and I'm in the forest with lots of good spawns available.\n\nLooking at my inventory:\n- Healroot x1\n- Moonpetal x1 \n- Sunleaf x4\n\nI see there are many good spawns available, including several high-richness ones:\n- Multiple Sunleaf spawns with richness 5 (ids: 76278a39-14e, b4fbedfb-963, 8d09e2f0-63b)\n- Several Healroot spawns with richness 3 and one with richness 4\n- Moonpetal spawns\n\nGiven that I have nearly 8 turns left and it's a rich area, I should continue harvesting while the spawns are good. I should prioritize the highest richness spawns since they give better yields and my foraging skill is still just novice level.\n\nThe highest richness spawns I can see are the Sunleaf with richness 5. I already have 4 Sunleaf but since these are such good spawns, it makes sense to harvest them.\n\nLet me harvest one of the richness 5 Sunleaf spawns."
+        },
+        {
+          "type": "text",
+          "text": "*Looking around at all the abundant herb patches scattered through the forest* \n\nWell, this is turning out to be quite the productive evening. With all these rich spawns still available and plenty of turns left, I'd be foolish not to take advantage. Those Sunleaf patches with richness 5 are particularly tempting - might as well harvest the best while it's here."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01DpJcd138oeVf7rioeUUnK5",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "76278a39-14e"
+          }
+        }
+      ]
+    }
+  ]
+}

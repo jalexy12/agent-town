@@ -1,0 +1,31 @@
+{
+  "turnId": 225,
+  "at": "2026-01-15T14:59:43.087Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my situation:\n\n- I'm in the forest with Clara and Dex\n- I have 8.64/10 turns remaining\n- I can see Sunleaf and Healroot spawns available\n- I have unread messages from alice and dex that seem to be duplicates or confusion (the messages from \"alice\" and \"dex\" to me don't make sense since I AM Alice)\n- I just sent a message to Dex explaining the spawns\n\nSince I have good turns remaining and there are harvestable spawns here, I should continue harvesting to build up my foraging skills and inventory. I can harvest the remaining spawns - there's a Sunleaf (richness 1) and a Healroot (richness 1) still available.\n\nLet me harvest the Sunleaf spawn first."
+        },
+        {
+          "type": "text",
+          "text": "Looking at the spawns still available here, I might as well make the most of this productive evening. Let me grab that remaining sunleaf before someone else does."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01WG8AvYv2LRBBS5iBUSumYk",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "8ccfb84e-ebd"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "turnId": 219,
+  "at": "2026-01-15T14:59:30.731Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n\n1. I'm in the forest with Clara and Finn\n2. I have 5.71 turns remaining  \n3. There are spawns here: Sunleaf (richness 1) and Healroot (richness 1)\n4. I have a massive backlog of unread messages from someone named \"clara\" who seems to be having an identity crisis, claiming to be Alice when I'm Alice\n5. There are also some messages from Finn about herb spawns\n\nThe messages from \"clara\" are very confusing - they keep insisting they are Alice, not Clara, and seem to think I'm someone named Dex. This is bizarre. But I should focus on what I can control.\n\nLooking at the spawns available:\n- Sunleaf (richness 1) [id: 8ccfb84e-ebd] \n- Healroot (richness 1) [id: b3022e25-3c5]\n\nI already have 2 Healroot and 1 Moonpetal in my inventory. Since I'm working on building up my foraging skills and these are low richness spawns (will only take 1 turn each), I should harvest them both to continue practicing and building my herb collection.\n\nI'll harvest the Sunleaf first since I don't have any yet."
+        },
+        {
+          "type": "text",
+          "text": "*Glances through the overwhelming pile of messages with a raised eyebrow* \n\nWell, that's... a lot to unpack. Someone's having quite the identity crisis, but I've got herbs to focus on. The spawns here look decent enough for skill building.\n\n*Spots the Sunleaf patch* \n\nMight as well add some variety to my collection - never hurts to have different types on hand for potential trades or experiments."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_015dM75xGUX94LcrQt4XN6bW",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "8ccfb84e-ebd"
+          }
+        }
+      ]
+    }
+  ]
+}

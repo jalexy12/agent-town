@@ -1,0 +1,31 @@
+{
+  "turnId": 257,
+  "at": "2026-01-15T15:19:28.946Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my situation:\n- I'm in the forest with 7.81 turns remaining\n- I have a healroot spawn available (richness 1)\n- I have several other people here: Clara, Dex, Eva, and Finn\n- My inventory has some herbs already: Healroot x1, Moonpetal x1, Sunleaf x4\n- I have 124 gold\n- My foraging skill is at novice level\n\nSince I just completed an explore action and found a healroot spawn, it makes sense to harvest it while I'm here. Healroot is useful for medicine and I'm trying to build up my herb collection. The richness is only 1 so it should only cost 1 turn to harvest.\n\nI could also consider interacting with the other people here, but I'm cautious with strangers until I see how they behave, so I'll focus on resource gathering for now."
+        },
+        {
+          "type": "text",
+          "text": "*I notice the healroot growing nearby and consider my options. With several other foragers around, I should probably secure this resource while I can.*\n\nI'll harvest that healroot spawn - might as well gather what's available while I'm here."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01A5wBUFQYLEUVcMZTxG8LgW",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "b3022e25-3c5"
+          }
+        }
+      ]
+    }
+  ]
+}

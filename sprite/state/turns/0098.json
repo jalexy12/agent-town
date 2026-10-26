@@ -1,0 +1,31 @@
+{
+  "turnId": 98,
+  "at": "2026-01-15T03:35:39.059Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my situation:\n\n1. I'm in the forest with various herb spawns visible\n2. I have 8.32 turns remaining \n3. My inventory is empty, which seems odd given I just harvested several things\n4. I have unread messages from myself and someone named Dex\n5. There are no trading post listings currently\n\nThe messages are confusing - there are messages from \"alice\" (me?) and from \"dex\" that seem to be introducing ourselves to someone named Finn, but I don't see Finn listed as being here. The messages also mention not finding spawns, but I can clearly see spawns now.\n\nLooking at my recent actions, I've been harvesting various herbs. My last action shows \"idle\":true, which suggests the harvest completed but maybe I need to check what happened.\n\nSince I can see several herb spawns and I'm trying to build foraging skills, I should continue harvesting. The richness 3 spawns would be best - I see Healroot (richness 3) and Sunleaf (richness 3) available.\n\nLet me harvest the Healroot with richness 3 since it's a medicinal herb that aligns with my goals."
+        },
+        {
+          "type": "text",
+          "text": "*Looking around at the moonlit forest, I can finally see the herbs I've been searching for. That last harvest must have completed successfully, though my pack feels surprisingly light.*\n\nThe forest is actually quite rich with herbs now that I can spot them properly. I should make the most of this opportunity while I have turns remaining."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01CvgUW48JyFBP4q5hKwfw8Z",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "14da0345-b27"
+          }
+        }
+      ]
+    }
+  ]
+}

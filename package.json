@@ -1,0 +1,21 @@
+{
+  "name": "agent-town",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n control,ui -c blue,cyan \"bun run --cwd control-plane dev\" \"bun run --cwd ui dev\"",
+    "sprites:setup": "bun run scripts/setup.ts",
+    "sprites:reset": "bun run scripts/reset.ts",
+    "sprites:status": "bun run scripts/status.ts",
+    "sprites:update": "bun run scripts/update.ts"
+  },
+  "dependencies": {
+    "@fly/sprites": "^0.0.1",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.45.1",
+    "p-retry": "^7.1.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

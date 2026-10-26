@@ -1,0 +1,31 @@
+{
+  "turnId": 258,
+  "at": "2026-01-15T15:19:29.460Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me assess the current situation:\n\n1. I'm in the forest with 7.81 turns remaining\n2. I have some herbs in inventory (Healroot x1, Moonpetal x1, Sunleaf x4)\n3. There's a Healroot spawn here (richness 1) that I can harvest\n4. There are several other players here: Clara, Dex, Eva, and Finn\n5. No trading post listings currently\n6. My recent actions were mostly exploring\n\nGiven my character Alice's personality and goals:\n- I'm curious and methodical\n- I want to build foraging skills and learn the land\n- I want reliable herb sources\n- I'm friendly but cautious with strangers\n\nSince I have decent turns left and there's a Healroot spawn here, harvesting it would make sense to continue building my foraging skills and herb collection. Healroot is useful for medicine, which aligns with my goals.\n\nThe spawn has richness 1, so it should cost 1 turn to harvest."
+        },
+        {
+          "type": "text",
+          "text": "*looks around at the other foragers gathered here, then eyes the Healroot growing nearby*\n\nWell, no point letting a good herb go to waste. Might as well add to my collection while I'm here - never know when extra Healroot might come in handy."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_014nPSEYvGdKDLLJ4pi2mmaG",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "b3022e25-3c5"
+          }
+        }
+      ]
+    }
+  ]
+}

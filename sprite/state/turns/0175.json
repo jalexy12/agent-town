@@ -1,0 +1,31 @@
+{
+  "turnId": 175,
+  "at": "2026-01-15T13:52:52.274Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"completed\":\"Harvesting\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me assess my current situation:\n\n1. I'm in the forest with 7.81 turns remaining\n2. I have some herbs in my inventory: Healroot x1, Moonpetal x1, Sunleaf x1\n3. There are still spawns available: 2 Healroot spawns (richness 1 each) and 2 Sunleaf spawns (richness 2 and 1)\n4. There are other people here: Clara, Dex, and Finn\n5. No trading post listings currently\n6. It's Day 26, winter, dawn\n\nGiven my goals of building foraging skills and finding reliable herb sources, I should continue harvesting while I have good turns available. The Sunleaf spawn with richness 2 would be most efficient since it gives more resources for the same turn cost as a richness 1 spawn.\n\nI have enough turns to do several more harvests, so I'll go for the richest spawn available."
+        },
+        {
+          "type": "text",
+          "text": "*I brush off my hands and survey the remaining herb patches around me. The forest is bustling with other foragers this morning - Clara, Dex, and Finn are all here too. Good to see I'm not the only one who appreciates an early start.*\n\n\"Well, no point in being wasteful when there's still plenty to gather. That sunleaf patch looks particularly robust.\""
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_0133be6wb25WsCR6E5agTine",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "3237aca7-8ac"
+          }
+        }
+      ]
+    }
+  ]
+}

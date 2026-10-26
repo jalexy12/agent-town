@@ -1,0 +1,31 @@
+{
+  "turnId": 153,
+  "at": "2026-01-15T12:51:54.106Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"type\":\"harvest\",\"success\":false,\"error\":\"No spawn ID\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "It looks like my last harvest attempt failed because of \"No spawn ID\" - that's odd since I was trying to harvest from spawn ID \"3237aca7-8ac\" which was listed as available. Maybe that spawn got depleted or disappeared between when I saw it and when I tried to harvest?\n\nLooking at my current situation:\n- I'm in the forest with 7.78 turns remaining\n- I have some herbs in inventory already (Healroot x1, Moonpetal x1, Sunleaf x1)\n- There are still several spawns visible:\n  - Healroot (richness: 3) [id: 14da0345-b27] \n  - Healroot (richness: 1) [id: 1cf62009-39a]\n  - Sunleaf (richness: 2) [id: 3237aca7-8ac] - wait, this is still showing as available\n  - Sunleaf (richness: 1) [id: 8ccfb84e-ebd]\n  - Healroot (richness: 1) [id: b3022e25-3c5]\n\nMaybe the spawn ID got corrupted or there was a temporary error. Let me try harvesting from a different spawn. The Healroot with richness 3 (id: 14da0345-b27) looks good - high richness means it should give me more resources and I can always use more Healroot.\n\nThere are other people here (Clara, Dex, Finn) so maybe they're also harvesting and competition is fierce. I should keep gathering while I can."
+        },
+        {
+          "type": "text",
+          "text": "*frowns at the empty patch where I thought I saw herbs* \n\nHmm, that's odd - the spawn seems to have disappeared right as I reached for it. Maybe someone else got to it first, or these forest patches are more ephemeral than I thought. Well, there are still plenty of other options here.\n\n*eyes the rich Healroot patch nearby*\n\nThat thick patch of Healroot looks promising - richness 3 should give me a good yield. Can't let these opportunities slip away."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_014xE7Ftg4Y3XJnajLZN2HRd",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "14da0345-b27"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "turnId": 402,
+  "at": "2026-01-15T16:01:23.090Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n1. Location: forest\n2. Gold: 156g\n3. Turns: 8.67/10 (good amount remaining)\n4. Time: Day 35, spring, dusk\n\nInventory:\n- Healroot x2\n- River Trout x2  \n- Silverscale x1\n- Sunleaf x3\n\nI can see several spawns in the forest:\n- Moonpetal (richness: 1) [id: 130864fc-02d]\n- Sunleaf (richness: 5) [id: 3002f1b9-e95]\n- Healroot (richness: 3) [id: 32cbcbd6-98a]\n- Healroot (richness: 3) [id: 54a70f1f-9db]\n- Sunleaf (richness: 5) [id: 70fd1890-eb9]\n- Healroot (richness: 4) [id: 730411fe-f7f]\n- Sunleaf (richness: 5) [id: 8042a225-6cf]\n\nI just sent a message to Dex about the herb spawns. Looking at my recent actions, I've been harvesting from the same Sunleaf spawn (3002f1b9-e95) multiple times and got 3 Sunleaf total.\n\nGiven my character traits (curious, methodical, likes to understand how things work), and my goals (build foraging skills, learn the land, find reliable herb sources), I should continue harvesting to:\n1. Build up my foraging skill\n2. Gather more herbs for potential trading/medicine\n3. Make use of these rich spawns while they're available\n\nThe Healroot with richness 4 (730411fe-f7f) would be a good choice since:\n- Higher richness than the other Healroot spawns\n\n\n- Healroot has medicinal value and I'm carrying fewer of them compared to Sunleaf. I'll target that spawn to balance out my collection."
+        },
+        {
+          "type": "text",
+          "text": "*Looking around at all these herb spawns with a mix of satisfaction and slight bewilderment*\n\nWell, would you look at that - after all my earlier wandering around finding nothing, this forest has turned into quite the herbal paradise. The irony isn't lost on me. Since I'm here and the spawns are rich, might as well make the most of it and build up my foraging experience.\n\nThat Healroot with the higher richness looks promising - always good to have more medicinal herbs on hand."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01Xzb6qxAq6aemTVmMH3deNv",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "730411fe-f7f"
+          }
+        }
+      ]
+    }
+  ]
+}

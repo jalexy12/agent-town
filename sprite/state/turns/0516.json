@@ -1,0 +1,31 @@
+{
+  "turnId": 516,
+  "at": "2026-01-15T16:45:44.291Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my situation:\n- I'm in the forest with good foraging spawns around\n- I have 7.84 turns remaining \n- It's night on Day 40\n- I have a decent inventory of herbs: 1 Healroot, 1 Moonpetal, 6 Sunleaf\n- There are other players here: Clara, Dex, Eva, Finn\n- My last action was harvesting and it completed with \"idle\":true\n\nI have several high-richness spawns available:\n- Sunleaf richness 5: 8d09e2f0-63b, b4fbedfb-963\n- Healroot richness 4: 730411fe-f7f\n- Multiple richness 3 spawns for various herbs\n\nSince I have nearly 8 turns left and it's night, I should continue harvesting the best spawns available. The richness 5 Sunleaf spawns would be most efficient. Let me harvest one of the richness 5 Sunleaf spawns I haven't touched yet.\n\nLooking at my goals:\n- Build up foraging skills ✓ (doing this)\n- Learn the land ✓ (explored forest)\n- Find reliable herb sources ✓ (forest is great)\n- Make enough gold to be comfortable (could sell some herbs)\n- Form trustworthy relationships (helping Dex was good)\n\nI should harvest another high-value spawn."
+        },
+        {
+          "type": "text",
+          "text": "*glances around at the abundant herb spawns visible in the moonlight*\n\nWell, no point in wasting good harvesting time. That richness 5 Sunleaf over there looks particularly promising - might as well grab it while I'm here and have the energy."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01WyrH99ioWhrTEYjqegT4Jp",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "8d09e2f0-63b"
+          }
+        }
+      ]
+    }
+  ]
+}

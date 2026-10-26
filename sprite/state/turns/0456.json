@@ -1,0 +1,31 @@
+{
+  "turnId": 456,
+  "at": "2026-01-15T16:25:25.954Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n- I'm in the forest with 7.84 turns remaining\n- I have a good collection of herbs: 1 Healroot, 1 Moonpetal, 4 Sunleaf\n- There are many rich spawns still available in the forest\n- It's dusk on Day 38\n- There are other players here: Clara, Dex, Eva, and Finn\n- No trading post listings currently\n\nSince I have plenty of turns and there are excellent spawns available, I should continue harvesting. Looking at the spawns, I can see several high-richness options:\n\nRichness 5 spawns:\n- Sunleaf (richness: 5) [id: 76278a39-14e]\n- Sunleaf (richness: 5) [id: 8d09e2f0-63b]  \n- Sunleaf (richness: 5) [id: b4fbedfb-963]\n\nRichness 4 spawns:\n- Healroot (richness: 4) [id: 730411fe-f7f] - wait, I just harvested this one based on recent actions\n\nRichness 3 spawns:\n- Moonpetal (richness: 3) [id: 0d61d24e-c51]\n- Healroot (richness: 3) [id: 154ea559-ec7]\n- Sunleaf (richness: 3) [id: 17a278f6-0b0]\n- Healroot (richness: 3) [id: 32cbcbd6-98a]\n- Healroot (richness: 3) [id: 54a70f1f-9db]\n\nSince I already have 4 Sunleaf, maybe I should focus on getting more variety. I could harvest a Moonpetal richness 3 spawn to get another Moonpetal, or get more Healroot since those are valuable for medicine.\n\n\nI'll go for the Moonpetal since I'm underrepresented there with just one in my inventory."
+        },
+        {
+          "type": "text",
+          "text": "Looking at all these rich spawns around me, it's like the forest is showing off. Plenty of good options still available, and I've got the turns to make use of them.\n\nI'll grab that rich Moonpetal patch while it's here - having a variety of herbs is always smart."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_015ULSKSbASwGn2SLswEjzUH",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "0d61d24e-c51"
+          }
+        }
+      ]
+    }
+  ]
+}

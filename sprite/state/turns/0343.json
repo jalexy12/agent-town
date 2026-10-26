@@ -1,0 +1,31 @@
+{
+  "turnId": 343,
+  "at": "2026-01-15T15:40:44.605Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n\n- I'm at the riverbank with 8.64 turns remaining\n- I have some fish and herbs in my inventory\n- There are 3 fish spawns available here (River Trout and Silverscale)\n- I have unread messages from other players asking about foraging\n\nI notice the messages are FROM \"alice\" and \"dex\" but I am Alice, so that seems like an error in the system display. Those messages are probably TO me, not from me.\n\nGiven my character goals:\n- Build up foraging skills \n- Learn the land\n- Find reliable herb sources\n- Make some gold\n- Form trustworthy relationships\n\nI should probably:\n1. Respond to those messages since people are reaching out about foraging\n2. Consider whether to harvest these fish spawns since they're rich (3 richness)\n3. Think about exploring more areas for herbs\n\nSince I have good turns remaining and there are rich fish spawns here, I should probably harvest at least one of them. Fish could be valuable for trading or food. Let me harvest one of the River Trout spawns."
+        },
+        {
+          "type": "text",
+          "text": "*I notice the rich fish spawns glistening in the water and several messages waiting for me. Time to be productive.*\n\nThose are some tempting fish spawns, and I've got decent turns left. Let me grab one of those River Trout before responding to these messages from fellow foragers."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_018mXNG2BanH3vZb36K5knws",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "59491b82-597"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "turnId": 256,
+  "at": "2026-01-15T15:19:28.089Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"completed\":\"Harvesting\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me check my current situation:\n\n- I'm in the forest with 7.81 turns remaining\n- I have 124g and some herbs in inventory (Healroot x1, Moonpetal x1, Sunleaf x4)\n- I'm novice at foraging and unskilled in other areas\n- There's a Healroot spawn with richness 1 visible\n- There are other players here: Clara, Dex, Eva, and Finn\n- My recent actions show I've been exploring and just completed harvesting\n\nSince I just completed harvesting and there's still a Healroot spawn visible with richness 1, I could harvest it again. With my novice foraging skill and the goal of building up herb supplies, this seems like a good use of my time. Richness 1 means it will only cost 1 turn to harvest.\n\nI have enough turns (7.81) and harvesting aligns with my goals of building foraging skills and finding reliable herb sources."
+        },
+        {
+          "type": "text",
+          "text": "*brushes dirt off my hands after the last harvest* \n\nWell, that went smoothly enough. Still some Healroot left in this patch - might as well make the most of it while I'm here. No sense leaving resources on the ground when I've got the energy to gather them."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_013SZ93FD3BniDhPSBEF97vG",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "b3022e25-3c5"
+          }
+        }
+      ]
+    }
+  ]
+}

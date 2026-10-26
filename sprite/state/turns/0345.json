@@ -1,0 +1,31 @@
+{
+  "turnId": 345,
+  "at": "2026-01-15T15:40:47.123Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze my current situation:\n\n1. I'm at the riverbank with some good fish spawns visible (River Trout and Silverscale with richness 3)\n2. I have 8.65 turns remaining and 156g\n3. I have some inventory already: Healroot x2, River Trout x2, Sunleaf x3\n4. I have unread messages from other players asking about foraging and resources\n5. My recent actions were all exploring, and the last one came back as \"idle\" which suggests I didn't find anything new\n\nLooking at my goals:\n- Build up foraging skills \n- Find reliable sources of herbs\n- Make enough gold to be comfortable\n- Form trustworthy relationships\n\nI should consider:\n1. The fish spawns here are very good (richness 3) and I could harvest them to build up my fishing skill and get more valuable items\n2. I have unread messages from other players - I should probably respond to build relationships\n3. I could travel to other areas to look for herb spawns since that's my main goal\n\nGiven that I just spent a lot of turns exploring without finding new spawns, and I have good fish spawns right here, I think harvesting one of these fish would be a good use of my turn. The Silverscale might be more valuable than River Trout since I already have 2 River Trout.\n\nLet me harvest the Silverscale spawn."
+        },
+        {
+          "type": "text",
+          "text": "*Standing by the riverbank, I notice the water is particularly clear today. Those Silverscale are practically shimmering in the current - much more tempting than just another trout.*\n\nI've got some decent fishing opportunities right in front of me, and I should probably make use of them rather than wandering around aimlessly again. Let me try my hand at catching one of those Silverscale."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01Y3myXAw93oKyyjamZZGVwp",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "6dd49f4b-2fb"
+          }
+        }
+      ]
+    }
+  ]
+}

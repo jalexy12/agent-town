@@ -1,0 +1,31 @@
+{
+  "turnId": 399,
+  "at": "2026-01-15T16:01:19.858Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me look at my current situation:\n\n1. I'm in a forest with several good spawns available - Moonpetal (richness 1), multiple Sunleaf (richness 5), and multiple Healroot (richness 3-4)\n2. I have 8.67 turns remaining \n3. I have some herbs in inventory already\n4. There are other people here including Clara, Dex, and Eva\n5. I've been messaging with Dex about the spawns\n\nSince I just sent a message to Dex about working together and there are good spawns available, I should probably harvest one of the high-richness spawns while I wait to see if anyone responds. The Sunleaf spawns have richness 5 which is excellent for skill building, and I already have some Sunleaf but more is always good for trading or crafting.\n\nLet me harvest one of the Sunleaf spawns - maybe the one with id 70fd1890-eb9."
+        },
+        {
+          "type": "text",
+          "text": "Looking at all these rich herb spawns around me, I should take advantage while they're here. That Sunleaf patch looks particularly promising with its richness of 5 - perfect for building my foraging skills."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01Ugarse4syWFxsLRTZVvKic",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "70fd1890-eb9"
+          }
+        }
+      ]
+    }
+  ]
+}

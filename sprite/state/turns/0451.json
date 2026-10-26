@@ -1,0 +1,31 @@
+{
+  "turnId": 451,
+  "at": "2026-01-15T16:21:50.476Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me assess my current situation:\n\n1. I'm in the forest with plenty of good herb spawns visible\n2. I have 8.69 turns remaining, which is plenty\n3. My inventory has some herbs already but I could gather more\n4. I sent a message to Dex explaining that there are spawns here\n5. There are other people here: Clara, Dex, and Eva\n6. No trading post listings currently\n\nLooking at the spawns available:\n- Moonpetal (richness: 1) - not great\n- Multiple Healroot spawns (richness 3, 3, 4) - good for medicine\n- Multiple Sunleaf spawns (richness 5, 2, 5) - very good\n\nSince I'm focused on building foraging skills and gathering herbs, I should continue harvesting. The richness 4 Healroot (730411fe-f7f) that I was working on might be depleted since I harvested it 4 times already. I should try one of the richness 5 Sunleaf spawns since those are excellent quality.\n\nLet me harvest from one of the high-quality Sunleaf spawns."
+        },
+        {
+          "type": "text",
+          "text": "Looking at these rich herb spawns, I should make the most of this excellent foraging opportunity. The forest is practically bursting with resources right now."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01UQosdpPpT9D7CQ2HmXvEC6",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "3002f1b9-e95"
+          }
+        }
+      ]
+    }
+  ]
+}

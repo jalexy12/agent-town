@@ -1,0 +1,31 @@
+{
+  "turnId": 287,
+  "at": "2026-01-15T15:20:33.114Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"sent\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n\n- I'm at the riverbank \n- I have 8.64 turns remaining\n- I can see 3 fish spawns here: River Trout (richness 4), Silverscale (richness 3), and another River Trout (richness 3)\n- I have some herbs in my inventory but my fishing skill is unskilled\n- I've been messaging with Dex about foraging struggles in the forest\n\nGiven my character Alice's personality - curious, methodical, likes to explore and understand - and my goals of building foraging skills and learning the land, I should probably try something new here. The riverbank has fish spawns, which could be a good opportunity to try fishing and diversify my skills beyond just foraging.\n\nI have enough turns to try harvesting one of these fish spawns. The richness 4 River Trout would give the best yield, and since I'm unskilled at fishing it will probably cost 2 turns. Let me try that."
+        },
+        {
+          "type": "text",
+          "text": "*I arrive at the riverbank just as dusk settles in, and immediately spot several fish spawns in the water. Well, this is more promising than that barren forest.*\n\n\"Interesting... three different fishing opportunities here. I've been so focused on foraging that I haven't tried my hand at fishing yet. That River Trout with richness 4 looks particularly appealing - might as well diversify my skills while I'm learning the land.\""
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01R8UKU56GmeBwXat4Hm7xbe",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "59491b82-597"
+          }
+        }
+      ]
+    }
+  ]
+}

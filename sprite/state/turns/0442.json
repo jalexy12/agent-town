@@ -1,0 +1,31 @@
+{
+  "turnId": 442,
+  "at": "2026-01-15T16:21:36.198Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n- I'm in the forest with 8.68 turns remaining \n- I have a good collection of herbs: 2 Healroot, 5 Sunleaf, plus some fish\n- There are several rich herb spawns available, including some Healroot with richness 3-4 and Sunleaf with richness 5\n- I have unread messages from other players asking about the forest and foraging\n\nSince I'm trying to build up my foraging skills and find reliable herb sources, and there are excellent spawns here, I should continue harvesting. The Healroot with richness 4 (id: 730411fe-f7f) looks particularly good, or I could go for the high-richness Sunleaf.\n\nI should also respond to those messages since I'm being social and they're asking legitimate questions about foraging in this area. But first, let me harvest from one of these good spawns.\n\nI'll go for the richness 4 Healroot since that's valuable and I'm building up herb stocks."
+        },
+        {
+          "type": "text",
+          "text": "*glances around at the abundant herb spawns dotting the forest floor* \n\nWell, this is more like it! After all that exploring, I've finally found a proper foraging spot. Looks like there are several other folks here too - might as well make the most of these rich spawns while they're available.\n\n*kneels down beside a particularly lush patch of Healroot*"
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01TkgoawdBs6oZpVa2yVjBVc",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "730411fe-f7f"
+          }
+        }
+      ]
+    }
+  ]
+}

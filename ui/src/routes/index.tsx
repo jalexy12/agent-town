@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useState, useEffect, lazy, Suspense } from 'react'
-import type { GameState, Agent } from '~/hooks/useGameEvents'
+import type { GameState, Agent, ActivityEvent } from '~/hooks/useGameEvents'
+import { ActivityPanel } from '~/components/ActivityPanel'
 
 export const Route = createFileRoute('/')({
   component: Game,
@@ -15,17 +16,6 @@ const INITIAL_AGENTS: Agent[] = [
   { id: 'dex', name: 'Dex', area: 'riverbank', status: 'busy', action: 'Fishing', turns: 5, gold: 67 },
   { id: 'eva', name: 'Eva', area: 'ruins', status: 'idle', action: 'Resting', turns: 2, gold: 201 },
   { id: 'finn', name: 'Finn', area: 'forest', status: 'busy', action: 'Traveling to Hills', turns: 8, gold: 156 },
-]
-
-const MOCK_EVENTS = [
-  { id: '1', time: '12:14', agent: 'Alice', text: 'discovered a Moonpetal patch in the forest', type: 'discovery' },
-  { id: '2', time: '12:09', agent: 'Bob', text: 'started exploring the hills', type: 'action' },
-  { id: '3', time: '12:06', agent: 'Clara', text: 'sold 3 Iron Ore to Finn for 45g', type: 'trade' },
-  { id: '4', time: '12:02', agent: 'Dex', text: 'caught a Silver Carp', type: 'action' },
-  { id: '5', time: '11:57', agent: 'Eva', text: 'went to sleep', type: 'status' },
-  { id: '6', time: '11:52', agent: 'Finn', text: 'sent a message to Alice: "Found anything good?"', type: 'message' },
-  { id: '7', time: '11:48', agent: 'Clara', text: 'listed 5 Copper Ore at 12g each', type: 'trade' },
-  { id: '8', time: '11:41', agent: 'Alice', text: 'traveled to the forest', type: 'action' },
 ]
 
 const AREA_COLORS_HEX: Record<string, string> = {
@@ -47,15 +37,30 @@ function Game() {
   const { data: gameState } = useQuery<GameState>({
     queryKey: ['game-state'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:4000/state')
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/state`)
       if (!res.ok) throw new Error('Failed to fetch game state')
       return res.json()
     },
-    initialData: { agents: INITIAL_AGENTS, day: 27, season: 'spring' },
+    placeholderData: { agents: INITIAL_AGENTS, day: 1, season: 'spring', timeOfDay: 'day' },
+    staleTime: Infinity,  // Once fetched, SSE handles updates
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: 'always',  // Always fetch real data on mount
+    refetchOnReconnect: false,
+  })
+
+  // Query activity events - fetches history on load, SSE adds new events
+  const { data: activityEvents = [] } = useQuery<ActivityEvent[]>({
+    queryKey: ['activity-events'],
+    queryFn: async () => {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/events/history`)
+      if (!res.ok) return []
+      return res.json()
+    },
     staleTime: Infinity,
     refetchInterval: false,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnReconnect: false,
   })
 
@@ -68,8 +73,8 @@ function Game() {
 
   return (
     <div className="h-screen w-screen bg-[var(--color-void)] relative overflow-hidden">
-      {/* World View - Full Screen PixiJS */}
-      <div className="absolute inset-0">
+      {/* World View - PixiJS (offset for activity panel) */}
+      <div className="absolute inset-0 right-[380px]">
         {isClient ? (
           <Suspense fallback={<WorldLoading />}>
             <PixiWorld
@@ -86,9 +91,11 @@ function Game() {
       {/* Top Left - Game Time */}
       <div className="absolute top-4 left-4 flex items-center gap-3 pointer-events-none">
         <div className="px-3 py-1.5 rounded bg-black/60 backdrop-blur-sm border border-white/10">
-          <span className="text-xs text-[var(--color-fog)]">Day 27</span>
+          <span className="text-xs text-[var(--color-fog)]">Day {gameState?.day ?? 1}</span>
           <span className="text-xs text-[var(--color-fog)] mx-2">·</span>
-          <span className="text-xs text-[var(--color-forest)]">Spring</span>
+          <span className="text-xs text-[var(--color-forest)] capitalize">{gameState?.season ?? 'spring'}</span>
+          <span className="text-xs text-[var(--color-fog)] mx-2">·</span>
+          <span className="text-xs text-[var(--color-mist)] capitalize">{gameState?.timeOfDay ?? 'day'}</span>
         </div>
         <div className="flex items-center gap-1.5 px-2 py-1.5 rounded bg-black/60 backdrop-blur-sm border border-white/10">
           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -96,8 +103,8 @@ function Game() {
         </div>
       </div>
 
-      {/* Top Right - Minimap / Area Overview */}
-      <div className="absolute top-4 right-4 w-48 pointer-events-none">
+      {/* Top Right - Minimap / Area Overview (offset for activity panel) */}
+      <div className="absolute top-4 right-[400px] w-48 pointer-events-none">
         <div className="rounded-lg bg-black/60 backdrop-blur-sm border border-white/10 p-3">
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(AREA_COLORS_HEX).map(([area, color]) => {
@@ -114,19 +121,11 @@ function Game() {
         </div>
       </div>
 
-      {/* Bottom Left - Activity Feed */}
-      <div className="absolute bottom-4 left-4 w-96">
-        <div className="rounded-lg bg-black/70 backdrop-blur-sm border border-white/10 max-h-64 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-y-auto p-3 space-y-1.5">
-            {MOCK_EVENTS.map((event) => (
-              <EventLine key={event.id} event={event} />
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Right Side - Activity Panel */}
+      <ActivityPanel events={activityEvents} />
 
-      {/* Bottom Right - Agent Portraits */}
-      <div className="absolute bottom-4 right-4">
+      {/* Bottom Left - Agent Portraits */}
+      <div className="absolute bottom-4 left-4">
         <div className="flex gap-2">
           {agents.map((a) => (
             <AgentPortrait
@@ -153,24 +152,6 @@ function WorldLoading() {
   return (
     <div className="w-full h-full bg-[#0a0f0a] flex items-center justify-center">
       <div className="text-[var(--color-fog)] text-sm">Loading world...</div>
-    </div>
-  )
-}
-
-function EventLine({ event }: { event: (typeof MOCK_EVENTS)[0] }) {
-  const typeColors: Record<string, string> = {
-    discovery: 'text-yellow-400',
-    trade: 'text-green-400',
-    message: 'text-purple-400',
-    action: 'text-[var(--color-mist)]',
-    status: 'text-[var(--color-fog)]',
-  }
-
-  return (
-    <div className="text-xs leading-relaxed">
-      <span className="text-[var(--color-ash)] mr-2">{event.time}</span>
-      <span className="text-[var(--color-amber)] hover:underline cursor-pointer">{event.agent}</span>
-      <span className={typeColors[event.type] || 'text-[var(--color-mist)]'}> {event.text}</span>
     </div>
   )
 }

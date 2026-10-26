@@ -1,0 +1,31 @@
+{
+  "turnId": 42,
+  "at": "2026-01-14T20:54:54.240Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me assess my current situation:\n\n- I'm in the forest at night on Day 1, spring\n- I have 7.15/10 turns remaining \n- I have 124g gold\n- My inventory is empty\n- I have novice foraging skill, everything else unskilled\n- There are 3 spawns visible: Moonpetal (richness 2), Healroot (richness 4), and Healroot (richness 1)\n- Finn is also here\n- No trading post listings currently\n- No unread messages\n\nMy goals are to build up foraging skills, learn the land, find reliable herb sources, make enough gold to be comfortable, and form trustworthy relationships.\n\nLooking at my recent actions, I just finished exploring the hills and then traveled to the forest. Now I can see some good foraging opportunities - two Healroot spawns and a Moonpetal. The Healroot with richness 4 looks particularly appealing since it should give good returns and help build my foraging skill.\n\nSince I'm focused on foraging and these are exactly the kinds of herbs I want to learn about for medicine, I should harvest from one of these spawns. The richness 4 Healroot seems like the best choice - it will likely give me more resources and better skill development than the others.\n\nI should harvest from the Healroot with richness 4."
+        },
+        {
+          "type": "text",
+          "text": "*I step quietly through the moonlit forest, noting the herb spawns scattered around. Finally, some promising finds after all that wandering.*\n\nPerfect - several herb spawns right here in the forest. That Healroot with higher richness looks particularly promising. Time to put my novice foraging skills to work and see what I can gather."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01Tpk6vRf29KdBp3BUkYxvo1",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "14da0345-b27"
+          }
+        }
+      ]
+    }
+  ]
+}

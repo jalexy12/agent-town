@@ -1,0 +1,31 @@
+{
+  "turnId": 443,
+  "at": "2026-01-15T16:21:38.822Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n1. I'm in the forest with several other people (Clara, Dex, Eva)\n2. I have 8.68 turns remaining\n3. There are multiple herb spawns available with good richness\n4. I have unread messages from myself and Dex - wait, that's odd. The messages say \"From alice\" and \"From dex\" but I AM Alice. This seems like there might be some confusion in the system or these are messages I sent that are being shown as received?\n\nLooking at the recent actions, I've been harvesting Sunleaf spawns successfully. My inventory shows I now have 5 Sunleaf, which is good progress.\n\nAvailable spawns:\n- Moonpetal (richness: 1) - not very rich\n- Multiple Healroot spawns (richness: 3, 3, 3, 4) - good for medicine\n- Sunleaf spawns (richness: 5, 2) - I already have 5, but more could be good for trading\n\nSince I have good turns remaining and my goal is to build foraging skills and gather herbs, I should continue harvesting. The richness 4 Healroot looks like a good target since Healroot is useful for medicine and I only have 2 currently.\n\nLet me harvest the richness 4 Healroot spawn."
+        },
+        {
+          "type": "text",
+          "text": "*Looking around at the forest's abundant herb spawns, I feel a surge of satisfaction. Finally found a productive spot after all that wandering around earlier.*\n\nThe forest is proving quite fruitful now that I've got my bearings. That rich Healroot spawn looks particularly promising - should give me a good foundation for any medicine brewing I might attempt later."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01YDLwcyawBpwRLsB988mJox",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "730411fe-f7f"
+          }
+        }
+      ]
+    }
+  ]
+}

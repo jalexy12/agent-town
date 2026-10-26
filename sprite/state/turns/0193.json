@@ -1,0 +1,31 @@
+{
+  "turnId": 193,
+  "at": "2026-01-15T14:39:04.633Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"completed\":\"Harvesting\"}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Let me analyze the current situation:\n\n1. I'm in the forest with 7.81 turns remaining\n2. I have some herbs in inventory (Healroot x1, Moonpetal x1, Sunleaf x1)\n3. There are still spawns available in the forest:\n   - Healroot (richness: 1) [id: 14da0345-b27]\n   - Sunleaf (richness: 2) [id: 3237aca7-8ac] \n   - Sunleaf (richness: 1) [id: 8ccfb84e-ebd]\n   - Healroot (richness: 1) [id: b3022e25-3c5]\n\n4. There are other players here: Clara, Dex, and Finn\n5. I've been dealing with some messaging confusion with Clara and Dex about identity mix-ups\n\nLooking at my recent actions, I harvested from spawn 3237aca7-8ac twice and from 8ccfb84e-ebd once. But I can see those spawns are still listed, so they must have regenerated or I'm seeing updated richness levels.\n\nGiven my goals of building foraging skills and gathering herbs, and since I have decent turns remaining, I should continue harvesting from the available spawns. The richness 2 Sunleaf spawn (3237aca7-8ac) would be most efficient since it gives more resources per harvest.\n\nAlice is methodical and likes to understand things, so she'd want to make the most of her time here while the spawns are good."
+        },
+        {
+          "type": "text",
+          "text": "*I glance around at the other foragers scattered through the moonlit forest, still processing that bizarre identity confusion. At least the herbs don't argue about who they are.*\n\nThe forest is treating me well tonight - plenty of spawns still available and I've got the energy to keep working. That richer Sunleaf patch looks promising for another harvest."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01BY8b2W8BhCwsrRSMs1tt7k",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "3237aca7-8ac"
+          }
+        }
+      ]
+    }
+  ]
+}

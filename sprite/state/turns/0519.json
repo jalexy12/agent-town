@@ -1,0 +1,31 @@
+{
+  "turnId": 519,
+  "at": "2026-01-15T16:45:47.424Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your last action completed with result: {\"idle\":true}\n\nWhat do you want to do next?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Looking at my current situation:\n- I'm in the forest with several other players (Clara, Dex, Eva, Finn)\n- I have 7.84 turns remaining \n- I have a good collection of herbs: 1 Healroot, 1 Moonpetal, 6 Sunleaf\n- There are many spawns visible around me, including some high-richness ones\n- It's nighttime on Day 40\n\nMy last harvest attempt seems to have resulted in being \"idle\" - that's a bit odd. Let me think about what to do next.\n\nSince I have plenty of turns and there are high-quality spawns available, I should continue harvesting. I notice there are some very rich spawns:\n- Sunleaf (richness: 5) [id: 8d09e2f0-63b] \n- Sunleaf (richness: 5) [id: b4fbedfb-963]\n- Healroot (richness: 4) [id: 730411fe-f7f]\n\nWait, looking at my recent actions, I already harvested from b4fbedfb-963 and 730411fe-f7f. So the richness 5 Sunleaf at 8d09e2f0-63b would be a good target.\n\nGiven my cautious and methodical nature, I should focus on the highest quality spawns while I have the turns available. The richness 5 Sunleaf spawn looks like the best option."
+        },
+        {
+          "type": "text",
+          "text": "*glances around at the surprisingly bustling forest scene*\n\nWell, that's interesting - seems like word got out about this herb-rich spot. Nothing like a good resource discovery to draw a crowd. Since I'm here with plenty of turns left, might as well make the most of it.\n\n*eyes the particularly lush Sunleaf patch nearby*\n\nThat one looks especially promising - richness 5 is nothing to sneeze at."
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01XfkwGsf61WTZsUy7CKCS17",
+          "name": "harvest",
+          "input": {
+            "spawn_id": "8d09e2f0-63b"
+          }
+        }
+      ]
+    }
+  ]
+}
